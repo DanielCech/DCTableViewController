@@ -526,11 +526,14 @@ extension DCTableViewHandling {
         
         var previousSectionIndex = 0
         var currentSectionIndex = 0
+        var buildSectionIndex = 0
         
         tableView.beginUpdates()
         
         while true {
-
+            
+            print("    previousSection: \(previousSectionIndex), currentSection: \(currentSectionIndex), buildSection: \(buildSectionIndex)")
+            
             let previousSectionDescription: SectionDescription? = (previousSectionIndex < structure.previousDataSourceSections.count) ? structure.previousDataSourceSections[previousSectionIndex] : nil
             
             let currentSectionDescription: SectionDescription? = (currentSectionIndex < structure.dataSourceSections.count) ? structure.dataSourceSections[currentSectionIndex] : nil
@@ -539,12 +542,13 @@ extension DCTableViewHandling {
                 break
             }
             else if (previousSectionDescription == nil) && (currentSectionDescription != nil) {
-                print("    insertSections: \(currentSectionIndex)")
-                tableView.insertSections(NSIndexSet(index: currentSectionIndex), withRowAnimation: insertAnimation)
+                print("    insertSections(A): \(buildSectionIndex)")
+                tableView.insertSections(NSIndexSet(index: previousSectionIndex), withRowAnimation: insertAnimation)
                 currentSectionIndex += 1
+                buildSectionIndex += 1
             }
             else if (previousSectionDescription != nil) && (currentSectionDescription == nil) {
-                print("    deleteSection: \(previousSectionIndex)")
+                print("    deleteSection(A): \(previousSectionIndex)")
                 tableView.deleteSections(NSIndexSet(index: previousSectionIndex), withRowAnimation: deleteAnimation)
                 previousSectionIndex += 1
             }
@@ -556,14 +560,15 @@ extension DCTableViewHandling {
                     let currentSectionID = unwrappedCurrentSectionDescription.sectionID
                     
                     if previousSectionID < currentSectionID {
-                        print("    deleteSection: \(previousSectionID)")
+                        print("    deleteSection(B): \(previousSectionID)")
                         tableView.deleteSections(NSIndexSet(index: previousSectionID), withRowAnimation: deleteAnimation)
                         previousSectionIndex += 1
                     }
                     else if previousSectionID > currentSectionID {
-                        print("    insertSections: \(currentSectionID)")
-                        tableView.insertSections(NSIndexSet(index: currentSectionID), withRowAnimation: insertAnimation)
+                        print("    insertSections(B): \(currentSectionID)")
+                        tableView.insertSections(NSIndexSet(index: buildSectionIndex), withRowAnimation: insertAnimation)
                         currentSectionIndex += 1
+                        buildSectionIndex += 1
                     }
                     else {
                         let resultsTuple = checkChangesInTable(tableView, currentSectionIndex: currentSectionIndex, previousSectionIndex: previousSectionIndex)
@@ -575,6 +580,7 @@ extension DCTableViewHandling {
                         
                         previousSectionIndex += 1
                         currentSectionIndex += 1
+                        buildSectionIndex += 1
                     }
                     
                 }
@@ -582,8 +588,8 @@ extension DCTableViewHandling {
             
         }
 
-        print("    rowsToInsert: \(displayIndexPaths(rowsToInsert)))")
-        print("    rowsToDelete: \(displayIndexPaths(rowsToDelete))")
+        print("    rowsToInsert: \(DCHelper.displayIndexPaths(rowsToInsert)))")
+        print("    rowsToDelete: \(DCHelper.displayIndexPaths(rowsToDelete))")
         print("    sectionsToDelete: \(sectionsToDelete)")
         
         
@@ -678,14 +684,6 @@ extension DCTableViewHandling {
                     continue
                 }
             }
-        }
-    }
-    
-    
-    func displayIndexPaths(indexPaths: [NSIndexPath]) -> [String]
-    {
-        return indexPaths.map { (indexPath) in
-            "<\(indexPath.section), \(indexPath.row)>"
         }
     }
     

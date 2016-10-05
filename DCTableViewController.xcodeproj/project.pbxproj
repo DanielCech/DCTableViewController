@@ -22,6 +22,7 @@
 		373F824A1DA50BCE00DD469C /* DCTableViewStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F82431DA50BCE00DD469C /* DCTableViewStructure.swift */; };
 		373F824E1DA53BF500DD469C /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F824C1DA53BF500DD469C /* TestCell.swift */; };
 		373F824F1DA53BF500DD469C /* TestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373F824D1DA53BF500DD469C /* TestCell.xib */; };
+		377D42FE1DA5B14800A3BF8D /* DCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D42FD1DA5B14800A3BF8D /* DCHelper.swift */; };
 		37F69C161D8623B100405F95 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F69C151D8623B100405F95 /* ReusableView.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		373F82431DA50BCE00DD469C /* DCTableViewStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCTableViewStructure.swift; sourceTree = "<group>"; };
 		373F824C1DA53BF500DD469C /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		373F824D1DA53BF500DD469C /* TestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell.xib; sourceTree = "<group>"; };
+		377D42FD1DA5B14800A3BF8D /* DCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCHelper.swift; sourceTree = "<group>"; };
 		37F69C151D8623B100405F95 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +102,7 @@
 				373F82411DA50BCE00DD469C /* DCTableViewController.swift */,
 				373F82421DA50BCE00DD469C /* DCTableViewHandling.swift */,
 				373F82431DA50BCE00DD469C /* DCTableViewStructure.swift */,
+				377D42FD1DA5B14800A3BF8D /* DCHelper.swift */,
 			);
 			path = DCTableViewController;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			files = (
 				37F69C161D8623B100405F95 /* ReusableView.swift in Sources */,
 				373F824E1DA53BF500DD469C /* TestCell.swift in Sources */,
+				377D42FE1DA5B14800A3BF8D /* DCHelper.swift in Sources */,
 				373F82481DA50BCE00DD469C /* DCTableViewController.swift in Sources */,
 				37118A601D815E4C006970BD /* MasterViewController.swift in Sources */,
 				37118A5E1D815E4C006970BD /* AppDelegate.swift in Sources */,
