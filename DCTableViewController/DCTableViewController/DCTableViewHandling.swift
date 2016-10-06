@@ -133,15 +133,6 @@ protocol DCTableViewHandling: class {
         inSections: [Int]?,
         insertAnimation: UITableViewRowAnimation,
         deleteAnimation: UITableViewRowAnimation)
-    
-    ////////////////////////////////////////////////////////////////
-    // MARK: - Private
-    
-    func checkChangesInTable(
-        tableView: UITableView,
-        currentSectionIndex: Int,
-        previousSectionIndex: Int)
-            -> (rowsToInsert: [NSIndexPath], rowsToDelete: [NSIndexPath], rowsToUpdate: [NSIndexPath], sectionsToDelete: [Int])
 
 }
     
