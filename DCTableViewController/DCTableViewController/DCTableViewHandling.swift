@@ -524,7 +524,7 @@ extension DCTableViewHandling {
         
         var rowsToInsert: [NSIndexPath] = []
         var rowsToDelete: [NSIndexPath] = []
-        var rowsToUpdate: [NSIndexPath] = []
+//        var rowsToUpdate: [NSIndexPath] = []
         
         
         let previousSectionIDs = structure.previousDataSourceSections.map { (section) -> Int in
@@ -536,11 +536,11 @@ extension DCTableViewHandling {
         }
         
         // Result when we delete items from previous array that are not in current array
-        let previousArrayFiltration = DCHelper.deleteUnusedPreviousValues(previousArray: previousSectionIDs, currentArray: currentSectionIDs)
-        sectionsToDelete = previousArrayFiltration.toDelete
+        let previousSectionIDsFiltration = DCHelper.deleteUnusedPreviousValues(previousArray: previousSectionIDs, currentArray: currentSectionIDs)
+        sectionsToDelete = previousSectionIDsFiltration.deletion
         
         // Sequence of insertions that transforms previousArrayFiltration to currentSectionIDs
-        let insetions = DCHelper.insertionsInArray(previousArray: previousArrayFiltration.result, currentArray: currentSectionIDs)
+        let insetions = DCHelper.insertionsInArray(previousArray: previousSectionIDsFiltration.result, currentArray: currentSectionIDs)
         
         sectionsToInsert = insetions.map({ (position: Int, value: Int) in
             return position
@@ -549,7 +549,7 @@ extension DCTableViewHandling {
         
         // Add rows from inserted sections
         for insetion in insetions {
-            let currentSectionIndex = self.tableView(tableView, indexOfSectionWithID: insetion.value, currentState: false)
+            let currentSectionIndex = self.tableView(tableView, indexOfSectionWithID: insetion.value, currentState: true)
             let cellDescriptions = structure.dataSourceCells[currentSectionIndex!]
             
             for _ in cellDescriptions {
@@ -557,11 +557,58 @@ extension DCTableViewHandling {
             }
         }
         
-        // Process rows for section common for previous and current arrays
-        for in previousArrayFiltration.result {
-            
-        }
+//        print("\n    previousSectionIDsFiltration.result \(previousSectionIDsFiltration.result)")
+//        
+//        // Process rows for section common for previous and current arrays
+//        for sectionID in previousSectionIDsFiltration.result {
+//            
+//            let previousSectionIndex = self.tableView(tableView, indexOfSectionWithID: sectionID, currentState: false)!
+//            
+//            let currentSectionIndex = self.tableView(tableView, indexOfSectionWithID: sectionID, currentState: true)!
+//            
+//            print("\n    previousSectionIndex \(previousSectionIndex), currentSectionIndex \(currentSectionIndex)")
+//            
+//            let previousSectionCellIDs = structure.previousDataSourceCells[previousSectionIndex].map({ cellDescription in
+//                cellDescription.cellID!
+//            })
+//            print("\n    previousSectionCellIDs \(previousSectionCellIDs)")
+//            
+//            let currentSectionCellIDs = structure.dataSourceCells[currentSectionIndex].map({ cellDescription in
+//                cellDescription.cellID!
+//            })
+//            print("\n    currentSectionCellIDs \(currentSectionCellIDs)")
+//            
+//            
+//            
+//            // Result when we delete items from previous array that are not in current array
+//            let previousSectionCellIDsFiltration = DCHelper.deleteUnusedPreviousValues(previousArray: previousSectionCellIDs, currentArray: currentSectionCellIDs)
+//            print("\n    previousSectionCellIDsFiltration.result \(previousSectionCellIDsFiltration.result)")
+//            print("\n    previousSectionCellIDsFiltration.deletion \(previousSectionCellIDsFiltration.deletion)")
+//            
+//            let sectionCellsToDelete = previousSectionCellIDsFiltration.deletion.map({ rowIndex in
+//                NSIndexPath(forRow: rowIndex, inSection: currentSectionIndex)
+//            })
+//            
+//            rowsToDelete += sectionCellsToDelete
+//            
+//            // Sequence of insertions that transforms previousArrayFiltration to currentSectionIDs
+//            let sectionCellsToInsert = DCHelper.insertionsInArray(previousArray: previousSectionCellIDsFiltration.result, currentArray: currentSectionIDs).map({ insertion in
+//                NSIndexPath(forRow: insertion.position, inSection: currentSectionIndex)
+//            })
+//            print("\n    sectionCellsToInsert \(DCHelper.displayIndexPaths(sectionCellsToInsert))")
+//            
+//            rowsToInsert += sectionCellsToInsert
+//        }
+//        
+        print("\n    sectionsToDelete: \(sectionsToDelete)\n")
+        print("    sectionsToInsert: \(sectionsToInsert)\n")
+        print("    rowsToDelete: \(DCHelper.displayIndexPaths(rowsToDelete))\n")
+        print("    rowsToInsert: \(DCHelper.displayIndexPaths(rowsToInsert))\n")
         
+        
+        print("AnimateTableChangesEnd")
+        
+
         
         tableView.beginUpdates()
         
@@ -569,11 +616,12 @@ extension DCTableViewHandling {
             tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: deleteAnimation)
         }
         
+        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
+        
         for sectionIndex in sectionsToInsert {
             tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: insertAnimation)
         }
         
-        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
         tableView.insertRowsAtIndexPaths(rowsToInsert, withRowAnimation: insertAnimation)
         
 //        

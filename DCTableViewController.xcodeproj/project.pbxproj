@@ -12,7 +12,6 @@
 		37118A651D815E4C006970BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37118A631D815E4C006970BD /* Main.storyboard */; };
 		37118A671D815E4C006970BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37118A661D815E4C006970BD /* Assets.xcassets */; };
 		37118A6A1D815E4C006970BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37118A681D815E4C006970BD /* LaunchScreen.storyboard */; };
-		373F823B1DA50AB700DD469C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F823A1DA50AB700DD469C /* DetailViewController.swift */; };
 		373F82441DA50BCE00DD469C /* DCCellDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F823D1DA50BCE00DD469C /* DCCellDescription.swift */; };
 		373F82451DA50BCE00DD469C /* DCSectionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F823E1DA50BCE00DD469C /* DCSectionDescription.swift */; };
 		373F82461DA50BCE00DD469C /* DCTableSupportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F823F1DA50BCE00DD469C /* DCTableSupportedViewController.swift */; };
@@ -34,7 +33,6 @@
 		37118A661D815E4C006970BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37118A691D815E4C006970BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37118A6B1D815E4C006970BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		373F823A1DA50AB700DD469C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		373F823D1DA50BCE00DD469C /* DCCellDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCCellDescription.swift; sourceTree = "<group>"; };
 		373F823E1DA50BCE00DD469C /* DCSectionDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCSectionDescription.swift; sourceTree = "<group>"; };
 		373F823F1DA50BCE00DD469C /* DCTableSupportedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCTableSupportedViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +78,6 @@
 			children = (
 				373F823C1DA50BCE00DD469C /* DCTableViewController */,
 				373F824B1DA53BA900DD469C /* Cells */,
-				373F823A1DA50AB700DD469C /* DetailViewController.swift */,
 				37F69C151D8623B100405F95 /* ReusableView.swift */,
 				37118A5D1D815E4C006970BD /* AppDelegate.swift */,
 				37118A661D815E4C006970BD /* Assets.xcassets */,
@@ -200,7 +197,6 @@
 				373F82491DA50BCE00DD469C /* DCTableViewHandling.swift in Sources */,
 				373F824A1DA50BCE00DD469C /* DCTableViewStructure.swift in Sources */,
 				373F82471DA50BCE00DD469C /* DCTableViewCellProtocol.swift in Sources */,
-				373F823B1DA50AB700DD469C /* DetailViewController.swift in Sources */,
 				373F82451DA50BCE00DD469C /* DCSectionDescription.swift in Sources */,
 				373F82461DA50BCE00DD469C /* DCTableSupportedViewController.swift in Sources */,
 			);

@@ -10,9 +10,6 @@ import UIKit
 
 class MasterViewController: DCTableViewController {
 
-    var detailViewController: DetailViewController? = nil
-    var objects = [AnyObject]()
-
     var updateTimer: NSTimer!
     var sectionIndex = 0
 
@@ -68,9 +65,9 @@ class MasterViewController: DCTableViewController {
         
         for index in 0...5 {
         
-            if arc4random() % 4 > 2 {
-                continue
-            }
+//            if arc4random() % 4 > 2 {
+//                continue
+//            }
             
             indexes.append(index)
             
