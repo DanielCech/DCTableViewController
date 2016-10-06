@@ -11,7 +11,7 @@ import UIKit
 class DCHelper: NSObject {
 
     // Values in arrays are ascending
-    class func deleteUnusedPreviousValues(previousArray previousArray: [Int], currentArray: [Int]) -> (result: [Int], deletion: [Int])
+    class func deleteUnusedPreviousValues(previousArray previousArray: [Int], currentArray: [Int]) -> (result: [Int], toDelete: [Int])
     {
         var previousArrayFiltered: [Int] = []
         var deletion: [Int] = []
@@ -48,7 +48,7 @@ class DCHelper: NSObject {
             }
         }
         
-        return (result: previousArrayFiltered, deletion: deletion)
+        return (result: previousArrayFiltered, toDelete: deletion)
     }
     
     
@@ -112,7 +112,7 @@ class DCHelper: NSObject {
         
         let insetions = DCHelper.insertionsInArray(previousArray: filtration.result, currentArray: currentArray)
         
-        return (toDelete: filtration.deletion, toInsert: insetions)
+        return (toDelete: filtration.toDelete, toInsert: insetions)
     }
     
     

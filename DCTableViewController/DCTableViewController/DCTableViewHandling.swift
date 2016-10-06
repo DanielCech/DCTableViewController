@@ -519,95 +519,170 @@ extension DCTableViewHandling {
         
         print("AnimateTableChangesStart")
         
+        var sectionsToInsert: [Int] = []
+        var sectionsToDelete: [Int] = []
+        
         var rowsToInsert: [NSIndexPath] = []
         var rowsToDelete: [NSIndexPath] = []
         var rowsToUpdate: [NSIndexPath] = []
-        var sectionsToDelete: [Int] = []
         
-        var previousSectionIndex = 0
-        var currentSectionIndex = 0
-        var buildSectionIndex = 0
+        
+        let previousSectionIDs = structure.previousDataSourceSections.map { (section) -> Int in
+            section.sectionID
+        }
+        
+        let currentSectionIDs = structure.dataSourceSections.map { (section) -> Int in
+            section.sectionID
+        }
+        
+        // Result when we delete items from previous array that are not in current array
+        let previousArrayFiltration = DCHelper.deleteUnusedPreviousValues(previousArray: previousSectionIDs, currentArray: currentSectionIDs)
+        sectionsToDelete = previousArrayFiltration.toDelete
+        
+        // Sequence of insertions that transforms previousArrayFiltration to currentSectionIDs
+        let insetions = DCHelper.insertionsInArray(previousArray: previousArrayFiltration.result, currentArray: currentSectionIDs)
+        
+        sectionsToInsert = insetions.map({ (position: Int, value: Int) in
+            return position
+        })
+        
+        
+        // Add rows from inserted sections
+        for insetion in insetions {
+            let currentSectionIndex = self.tableView(tableView, indexOfSectionWithID: insetion.value, currentState: false)
+            let cellDescriptions = structure.dataSourceCells[currentSectionIndex!]
+            
+            for _ in cellDescriptions {
+                rowsToInsert.append(NSIndexPath(forRow: 0, inSection: insetion.position))
+            }
+        }
+        
+        // Process rows for section common for previous and current arrays
+        for in previousArrayFiltration.result {
+            
+        }
+        
         
         tableView.beginUpdates()
-        
-        while true {
-            
-            print("    previousSection: \(previousSectionIndex), currentSection: \(currentSectionIndex), buildSection: \(buildSectionIndex)")
-            
-            let previousSectionDescription: SectionDescription? = (previousSectionIndex < structure.previousDataSourceSections.count) ? structure.previousDataSourceSections[previousSectionIndex] : nil
-            
-            let currentSectionDescription: SectionDescription? = (currentSectionIndex < structure.dataSourceSections.count) ? structure.dataSourceSections[currentSectionIndex] : nil
-            
-            if (previousSectionDescription == nil) && (currentSectionDescription == nil) {
-                break
-            }
-            else if (previousSectionDescription == nil) && (currentSectionDescription != nil) {
-                print("    insertSections(A): \(buildSectionIndex)")
-                tableView.insertSections(NSIndexSet(index: previousSectionIndex), withRowAnimation: insertAnimation)
-                currentSectionIndex += 1
-                buildSectionIndex += 1
-            }
-            else if (previousSectionDescription != nil) && (currentSectionDescription == nil) {
-                print("    deleteSection(A): \(previousSectionIndex)")
-                tableView.deleteSections(NSIndexSet(index: previousSectionIndex), withRowAnimation: deleteAnimation)
-                previousSectionIndex += 1
-            }
-            else {
-                if let unwrappedPreviousSectionDescription = previousSectionDescription,
-                    let unwrappedCurrentSectionDescription = currentSectionDescription {
-                    
-                    let previousSectionID = unwrappedPreviousSectionDescription.sectionID
-                    let currentSectionID = unwrappedCurrentSectionDescription.sectionID
-                    
-                    if previousSectionID < currentSectionID {
-                        print("    deleteSection(B): \(previousSectionID)")
-                        tableView.deleteSections(NSIndexSet(index: previousSectionID), withRowAnimation: deleteAnimation)
-                        previousSectionIndex += 1
-                    }
-                    else if previousSectionID > currentSectionID {
-                        print("    insertSections(B): \(currentSectionID)")
-                        tableView.insertSections(NSIndexSet(index: buildSectionIndex), withRowAnimation: insertAnimation)
-                        currentSectionIndex += 1
-                        buildSectionIndex += 1
-                    }
-                    else {
-                        let resultsTuple = checkChangesInTable(tableView, currentSectionIndex: currentSectionIndex, previousSectionIndex: previousSectionIndex)
-                        
-                        rowsToInsert.appendContentsOf(resultsTuple.rowsToInsert)
-                        rowsToDelete.appendContentsOf(resultsTuple.rowsToDelete)
-                        rowsToUpdate.appendContentsOf(resultsTuple.rowsToUpdate)
-                        sectionsToDelete.appendContentsOf(resultsTuple.sectionsToDelete)
-                        
-                        previousSectionIndex += 1
-                        currentSectionIndex += 1
-                        buildSectionIndex += 1
-                    }
-                    
-                }
-            }
-            
-        }
-
-        print("    rowsToInsert: \(DCHelper.displayIndexPaths(rowsToInsert)))")
-        print("    rowsToDelete: \(DCHelper.displayIndexPaths(rowsToDelete))")
-        print("    sectionsToDelete: \(sectionsToDelete)")
-        
-        
-        tableView.insertRowsAtIndexPaths(rowsToInsert, withRowAnimation: insertAnimation)
-        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
-        
-        if withUpdates {
-            tableView.reloadRowsAtIndexPaths(rowsToUpdate, withRowAnimation: .None)
-        }
         
         for sectionIndex in sectionsToDelete {
             tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: deleteAnimation)
         }
         
+        for sectionIndex in sectionsToInsert {
+            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: insertAnimation)
+        }
+        
+        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
+        tableView.insertRowsAtIndexPaths(rowsToInsert, withRowAnimation: insertAnimation)
+        
+//        
+//        if withUpdates {
+//            tableView.reloadRowsAtIndexPaths(rowsToUpdate, withRowAnimation: .None)
+//        }
+        
         
         tableView.endUpdates()
         
-        print("AnimateTableChangesEnd")
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        return
+        
+//        ////////////////////////////////////////////////////////////////
+//        
+//        var previousSectionIndex = 0
+//        var currentSectionIndex = 0
+//
+//        
+//        tableView.beginUpdates()
+//        
+//        while true {
+//            
+//            print("    previousSection: \(previousSectionIndex), currentSection: \(currentSectionIndex), buildSection: \(buildSectionIndex)")
+//            
+//            let previousSectionDescription: SectionDescription? = (previousSectionIndex < structure.previousDataSourceSections.count) ? structure.previousDataSourceSections[previousSectionIndex] : nil
+//            
+//            let currentSectionDescription: SectionDescription? = (currentSectionIndex < structure.dataSourceSections.count) ? structure.dataSourceSections[currentSectionIndex] : nil
+//            
+//            if (previousSectionDescription == nil) && (currentSectionDescription == nil) {
+//                break
+//            }
+//            else if (previousSectionDescription == nil) && (currentSectionDescription != nil) {
+//                print("    insertSections(A): \(buildSectionIndex)")
+//                tableView.insertSections(NSIndexSet(index: previousSectionIndex), withRowAnimation: insertAnimation)
+//                currentSectionIndex += 1
+//                buildSectionIndex += 1
+//            }
+//            else if (previousSectionDescription != nil) && (currentSectionDescription == nil) {
+//                print("    deleteSection(A): \(previousSectionIndex)")
+//                tableView.deleteSections(NSIndexSet(index: previousSectionIndex), withRowAnimation: deleteAnimation)
+//                previousSectionIndex += 1
+//            }
+//            else {
+//                if let unwrappedPreviousSectionDescription = previousSectionDescription,
+//                    let unwrappedCurrentSectionDescription = currentSectionDescription {
+//                    
+//                    let previousSectionID = unwrappedPreviousSectionDescription.sectionID
+//                    let currentSectionID = unwrappedCurrentSectionDescription.sectionID
+//                    
+//                    if previousSectionID < currentSectionID {
+//                        print("    deleteSection(B): \(previousSectionID)")
+//                        tableView.deleteSections(NSIndexSet(index: previousSectionID), withRowAnimation: deleteAnimation)
+//                        previousSectionIndex += 1
+//                    }
+//                    else if previousSectionID > currentSectionID {
+//                        print("    insertSections(B): \(currentSectionID)")
+//                        tableView.insertSections(NSIndexSet(index: buildSectionIndex), withRowAnimation: insertAnimation)
+//                        currentSectionIndex += 1
+//                        buildSectionIndex += 1
+//                    }
+//                    else {
+//                        let resultsTuple = checkChangesInTable(tableView, currentSectionIndex: currentSectionIndex, previousSectionIndex: previousSectionIndex)
+//                        
+//                        rowsToInsert.appendContentsOf(resultsTuple.rowsToInsert)
+//                        rowsToDelete.appendContentsOf(resultsTuple.rowsToDelete)
+//                        rowsToUpdate.appendContentsOf(resultsTuple.rowsToUpdate)
+//                        sectionsToDelete.appendContentsOf(resultsTuple.sectionsToDelete)
+//                        
+//                        previousSectionIndex += 1
+//                        currentSectionIndex += 1
+//                        buildSectionIndex += 1
+//                    }
+//                    
+//                }
+//            }
+//            
+//        }
+//
+//        print("    rowsToInsert: \(DCHelper.displayIndexPaths(rowsToInsert)))")
+//        print("    rowsToDelete: \(DCHelper.displayIndexPaths(rowsToDelete))")
+//        print("    sectionsToDelete: \(sectionsToDelete)")
+//        
+//        
+//        tableView.insertRowsAtIndexPaths(rowsToInsert, withRowAnimation: insertAnimation)
+//        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
+//        
+//        if withUpdates {
+//            tableView.reloadRowsAtIndexPaths(rowsToUpdate, withRowAnimation: .None)
+//        }
+//        
+//        for sectionIndex in sectionsToDelete {
+//            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: deleteAnimation)
+//        }
+//        
+//        
+//        tableView.endUpdates()
+//        
+//        print("AnimateTableChangesEnd")
         
     }
     
