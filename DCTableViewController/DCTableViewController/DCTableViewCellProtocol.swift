@@ -21,8 +21,7 @@ extension DCTableViewCellProtocol {
     func updateCell(viewModel viewModel: Any, delegate: Any? = nil)
     {
         //Implement in derived cells
-    }
-    
+    }    
 }
 
 

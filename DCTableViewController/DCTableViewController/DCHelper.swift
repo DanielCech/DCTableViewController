@@ -21,9 +21,7 @@ class DCHelper: NSObject {
         var createdIndex = 0
         
         while true {
-            //            print("deleteUnusedPreviousValues: previous \(previousIndex), current \(currentIndex)")
             if previousIndex >= previousArray.count {
-                //                print("deleteUnusedPreviousValues: end1")
                 break
             }
             
@@ -36,13 +34,10 @@ class DCHelper: NSObject {
                 continue
             }
             
-            //        print("deleteUnusedPreviousValues: previousValue")
             let previousValue = previousArray[previousIndex]
-            //        print("deleteUnusedPreviousValues: currentValue")
             let currentValue = currentArray[currentIndex]
             
             if previousValue < currentValue {
-                //                print("previous mensi")
                 deletion.append(createdIndex)
                 previousIndex += 1
                 if updateIndex {
@@ -50,19 +45,15 @@ class DCHelper: NSObject {
                 }
             }
             else if currentValue < previousValue {
-                //                print("current mensi")
                 currentIndex += 1
             }
             else {  // Equal
-                //                print("stejne")
                 previousIndex += 1
                 currentIndex += 1
                 createdIndex += 1
                 previousArrayFiltered.append(currentValue)
             }
         }
-        
-        //        print("deleteUnusedPreviousValues: deletion \(deletion)")
         
         return (result: previousArrayFiltered, deletion: deletion)
     }
@@ -78,22 +69,18 @@ class DCHelper: NSObject {
         var createdIndex = 0
         
         while true {
-            //        print("previous \(previousIndex), current \(currentIndex)")
             let previousEnd = (previousIndex >= previousArray.count)
             let currentEnd = (currentIndex >= currentArray.count)
             
             if previousEnd && currentEnd {
-                //            print("end1")
                 break
             }
             else if previousEnd && !currentEnd {
-                //            print("toInsert1")
                 toInsert.append((position: createdIndex, value: currentArray[currentIndex]))
                 currentIndex += 1
                 createdIndex += 1
             }
             else if !previousEnd && currentEnd {
-                //            print("end2")
                 break
             }
             else if !previousEnd && !currentEnd {
@@ -102,19 +89,16 @@ class DCHelper: NSObject {
                 let currentValue = currentArray[currentIndex]
                 
                 if previousValue < currentValue {
-                    //                print("previous mensi")
                     toInsert.append((position: createdIndex, value: currentArray[currentIndex]))
                     previousIndex += 1
                     createdIndex += 1
                 }
                 else if currentValue < previousValue {
-                    //                print("current mensi")
                     toInsert.append((position: createdIndex, value: currentArray[currentIndex]))
                     currentIndex += 1
                     createdIndex += 1
                 }
                 else {  // Equal
-                    //                print("stejne")
                     previousIndex += 1
                     currentIndex += 1
                     createdIndex += 1

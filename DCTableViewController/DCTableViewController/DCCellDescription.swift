@@ -25,6 +25,8 @@ protocol CellDescribing {
     var cellHeight: ((cellDescription: Self, indexPath: NSIndexPath) -> CGFloat)? { get set }
     var estimatedCellHeight: ((cellDescription: Self, indexPath: NSIndexPath) -> CGFloat)? { get set }
     
+    var needsReload: Bool { get set }
+    
     var didSelectCell: ((cell: UITableViewCell, cellDescription: Self, indexPath: NSIndexPath) -> ())? { get set }
     var didDeselectCell: ((cell: UITableViewCell, cellDescription: Self, indexPath: NSIndexPath) -> ())? { get set }
 }
@@ -36,7 +38,8 @@ struct CellDescription: CellDescribing {
     
     var cellID: Int? = nil
     var cellType: CellType
-    var viewModel: Any?          //viewModel for cell is any associated value with cell, it can be number, string or class/struct
+    var needsReload: Bool = false
+    var viewModel: Any? { didSet { needsReload = true }}    //viewModel for cell is any associated value with cell, it can be number, string or class/struct
     var delegate: Any?
     var cellHeight: ((cellDescription: CellDescription, indexPath: NSIndexPath) -> CGFloat)? = nil
     var estimatedCellHeight: ((cellDescription: CellDescription, indexPath: NSIndexPath) -> CGFloat)? = nil
@@ -47,6 +50,7 @@ struct CellDescription: CellDescribing {
     init(
         cellID: Int? = nil,
         cellType: CellType,
+        needsReload: Bool = false,
         viewModel: Any? = nil,
         delegate: Any? = nil,
         cellHeight: ((cellDescription: CellDescription, indexPath: NSIndexPath) -> CGFloat)? = nil,
@@ -56,6 +60,7 @@ struct CellDescription: CellDescribing {
     {
         self.cellID = cellID
         self.cellType = cellType
+        self.needsReload = needsReload
         self.viewModel = viewModel
         self.delegate = delegate
         self.cellHeight = cellHeight

@@ -28,7 +28,7 @@ class MasterViewController: DCTableViewController {
         createDataSourceForTable(tableView)
         tableView.reloadData()
         
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(MasterViewController.refreshTable), userInfo: nil, repeats: true)
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MasterViewController.refreshTable), userInfo: nil, repeats: true)
     }
 
     // MARK: - Table View
@@ -65,9 +65,9 @@ class MasterViewController: DCTableViewController {
         
         for index in 0...5 {
         
-//            if arc4random() % 4 > 2 {
-//                continue
-//            }
+            if arc4random() % 4 > 2 {
+                continue
+            }
             
             indexes.append(index)
             
