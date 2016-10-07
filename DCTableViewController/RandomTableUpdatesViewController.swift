@@ -1,5 +1,5 @@
 //
-//  MasterViewController.swift
+//  RandomTableUpdatesViewController.swift
 //  DCTableViewController
 //
 //  Created by Dan on 08.09.16.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-class MasterViewController: DCTableViewController {
-
+class RandomTableUpdatesViewController: DCTableViewController {
+    
+    var customIteration: Int = 1
     var updateTimer: NSTimer!
     var sectionIndex = 0
 
@@ -28,7 +29,7 @@ class MasterViewController: DCTableViewController {
         createDataSourceForTable(tableView)
         tableView.reloadData()
         
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(MasterViewController.refreshTable), userInfo: nil, repeats: true)
+        updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(RandomTableUpdatesViewController.refreshTable), userInfo: nil, repeats: true)
     }
 
     // MARK: - Table View
@@ -92,7 +93,7 @@ class MasterViewController: DCTableViewController {
     func refreshTable()
     {
         createDataSourceForTable(tableView)
-        animateTableChanges(tableView, withUpdates: false, insertAnimation: .Fade, deleteAnimation: .Fade)
+        animateTableChanges(tableView, withUpdates: true, insertAnimation: .Fade, deleteAnimation: .Fade)
     }
     
 }

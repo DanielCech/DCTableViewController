@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		37118A5E1D815E4C006970BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37118A5D1D815E4C006970BD /* AppDelegate.swift */; };
-		37118A601D815E4C006970BD /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37118A5F1D815E4C006970BD /* MasterViewController.swift */; };
+		37118A601D815E4C006970BD /* RandomTableUpdatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37118A5F1D815E4C006970BD /* RandomTableUpdatesViewController.swift */; };
 		37118A651D815E4C006970BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37118A631D815E4C006970BD /* Main.storyboard */; };
 		37118A671D815E4C006970BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37118A661D815E4C006970BD /* Assets.xcassets */; };
 		37118A6A1D815E4C006970BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37118A681D815E4C006970BD /* LaunchScreen.storyboard */; };
+		3724CB2B1DA7A1C9003AAC37 /* CustomTableUpdatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3724CB2A1DA7A1C9003AAC37 /* CustomTableUpdatesViewController.swift */; };
 		373F82441DA50BCE00DD469C /* DCCellDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F823D1DA50BCE00DD469C /* DCCellDescription.swift */; };
 		373F82451DA50BCE00DD469C /* DCSectionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F823E1DA50BCE00DD469C /* DCSectionDescription.swift */; };
 		373F82461DA50BCE00DD469C /* DCTableSupportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F823F1DA50BCE00DD469C /* DCTableSupportedViewController.swift */; };
@@ -28,11 +29,12 @@
 /* Begin PBXFileReference section */
 		37118A5A1D815E4C006970BD /* DCTableViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCTableViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37118A5D1D815E4C006970BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37118A5F1D815E4C006970BD /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		37118A5F1D815E4C006970BD /* RandomTableUpdatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomTableUpdatesViewController.swift; sourceTree = "<group>"; };
 		37118A641D815E4C006970BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37118A661D815E4C006970BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37118A691D815E4C006970BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37118A6B1D815E4C006970BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3724CB2A1DA7A1C9003AAC37 /* CustomTableUpdatesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableUpdatesViewController.swift; sourceTree = "<group>"; };
 		373F823D1DA50BCE00DD469C /* DCCellDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCCellDescription.swift; sourceTree = "<group>"; };
 		373F823E1DA50BCE00DD469C /* DCSectionDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCSectionDescription.swift; sourceTree = "<group>"; };
 		373F823F1DA50BCE00DD469C /* DCTableSupportedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCTableSupportedViewController.swift; sourceTree = "<group>"; };
@@ -84,7 +86,8 @@
 				37118A6B1D815E4C006970BD /* Info.plist */,
 				37118A681D815E4C006970BD /* LaunchScreen.storyboard */,
 				37118A631D815E4C006970BD /* Main.storyboard */,
-				37118A5F1D815E4C006970BD /* MasterViewController.swift */,
+				37118A5F1D815E4C006970BD /* RandomTableUpdatesViewController.swift */,
+				3724CB2A1DA7A1C9003AAC37 /* CustomTableUpdatesViewController.swift */,
 			);
 			path = DCTableViewController;
 			sourceTree = "<group>";
@@ -191,7 +194,8 @@
 				373F824E1DA53BF500DD469C /* TestCell.swift in Sources */,
 				377D42FE1DA5B14800A3BF8D /* DCHelper.swift in Sources */,
 				373F82481DA50BCE00DD469C /* DCTableViewController.swift in Sources */,
-				37118A601D815E4C006970BD /* MasterViewController.swift in Sources */,
+				37118A601D815E4C006970BD /* RandomTableUpdatesViewController.swift in Sources */,
+				3724CB2B1DA7A1C9003AAC37 /* CustomTableUpdatesViewController.swift in Sources */,
 				37118A5E1D815E4C006970BD /* AppDelegate.swift in Sources */,
 				373F82441DA50BCE00DD469C /* DCCellDescription.swift in Sources */,
 				373F82491DA50BCE00DD469C /* DCTableViewHandling.swift in Sources */,

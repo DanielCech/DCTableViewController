@@ -642,8 +642,11 @@ extension DCTableViewHandling {
         
         print("AnimateTableChangesEnd")
         
+        
+        
+    
         tableView.beginUpdates()
-                
+        
         // 1. remove sections
         for sectionIndex in sectionsToDelete {
             tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: deleteAnimation)
@@ -652,11 +655,13 @@ extension DCTableViewHandling {
         // 2. remove cells
         tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
         
+        
         // 3. update cells
         if withUpdates {
             tableView.reloadRowsAtIndexPaths(rowsToUpdate, withRowAnimation: .None)
         }
 
+        
         // 4. insert sections
         for sectionIndex in sectionsToInsert {
             tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: insertAnimation)
@@ -665,8 +670,8 @@ extension DCTableViewHandling {
         // 5. insert cells
         tableView.insertRowsAtIndexPaths(rowsToInsert, withRowAnimation: insertAnimation)
         
-
         tableView.endUpdates()
+        
     }
     
     
