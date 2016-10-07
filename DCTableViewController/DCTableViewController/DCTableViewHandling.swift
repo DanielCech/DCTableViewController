@@ -596,25 +596,15 @@ extension DCTableViewHandling {
             if withUpdates {
                 var sectionCellsToUpdate: [NSIndexPath] = []
                 
-                if let previousFilteredSectionIndex = previousSectionIDsFiltration.result.indexOf(sectionID) {
-                    for (index, cellID) in previousSectionCellIDs.enumerate() {
-                        if previousSectionCellIDsFiltration.result.indexOf(cellID) != nil {
-                            
-                            sectionCellsToUpdate.append(NSIndexPath(forRow: index, inSection: previousSectionIndex))
-                        }
+                for (index, cellID) in currentSectionCellIDs.enumerate() {
+                    if previousSectionCellIDsFiltration.result.indexOf(cellID) != nil {
+                        
+                        sectionCellsToUpdate.append(NSIndexPath(forRow: index, inSection: currentSectionIndex))
                     }
-                    
-                    rowsToUpdate += sectionCellsToUpdate
-                    
-//                    if previousSectionCellIDsFiltration.result.count >= 1 {
-//                        let sectionCellsToUpdate = (0...previousSectionCellIDsFiltration.result.count - 1).map({ rowIndex in
-//                            NSIndexPath(forRow: rowIndex, inSection: previousFilteredSectionIndex)
-//                        })
-//                        print("    sectionCellsToUpdate \(DCHelper.displayIndexPaths(sectionCellsToUpdate))")
-//                        
-//                        
-//                    }
                 }
+                
+                rowsToUpdate += sectionCellsToUpdate
+
             }
             
             // Row insertions
