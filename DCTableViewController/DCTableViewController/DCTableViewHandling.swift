@@ -519,6 +519,11 @@ extension DCTableViewHandling {
         
         print("AnimateTableChangesStart")
         
+        let visibleCells = tableView.visibleCells
+        let visibleCellsIndexPaths = visibleCells.map { cell in
+            tableView.indexPathForCell(cell)!
+        }
+        
         var sectionsToInsert: [Int] = []
         var sectionsToDelete: [Int] = []
         
@@ -592,19 +597,36 @@ extension DCTableViewHandling {
             
             rowsToDelete += sectionCellsToDelete
             
-            // Row updates
+            //Check row updates
             if withUpdates {
-                var sectionCellsToUpdate: [NSIndexPath] = []
                 
-                for (index, cellID) in currentSectionCellIDs.enumerate() {
-                    if previousSectionCellIDsFiltration.result.indexOf(cellID) != nil {
+                // Find all cells in previous section
+                for (previousIndex, previousCellID) in previousSectionCellIDs.enumerate() {
+                    // Filter cells for updating
+                    if previousSectionCellIDsFiltration.result.indexOf(previousCellID) != nil {
                         
-                        sectionCellsToUpdate.append(NSIndexPath(forRow: index, inSection: currentSectionIndex))
+                        let previousIndexPath = NSIndexPath(forRow: previousIndex, inSection: previousSectionIndex)
+                        
+                        // Is the cell visible?
+                        if let visibleCellIndex = visibleCellsIndexPaths.indexOf(previousIndexPath) {
+                            if let cell = visibleCells[visibleCellIndex] as? DCTableViewCellProtocol {
+                                
+                                // Find indexPath of cell in a new data source
+                                for (currentIndex, currentCellID) in currentSectionCellIDs.enumerate() {
+                                    if currentCellID == previousCellID {
+                                        let currentIndexPath = NSIndexPath(forRow: currentIndex, inSection: currentSectionIndex)
+                                        if let cellDescription = self.tableView(tableView, descriptionForCellAtIndexPath: currentIndexPath) {
+                                            //Update visible cell with the new viewModel
+                                            if let viewModel = cellDescription.viewModel {
+                                                cell.updateCell(viewModel: viewModel, delegate: cellDescription.delegate)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-                
-                rowsToUpdate += sectionCellsToUpdate
-
             }
             
             // Row insertions
@@ -617,24 +639,15 @@ extension DCTableViewHandling {
             rowsToInsert += sectionCellsToInsert
         }
         
-        // Sanity check
-//        for indexPath in rowsToDelete + rowsToInsert {
-//            if let index = rowsToUpdate.indexOf(indexPath) {
-//                rowsToUpdate.removeAtIndex(index)
-//            }
-//        }
         
         print("    sectionsToDelete: \(sectionsToDelete)")
         print("    rowsToDelete: \(DCHelper.displayIndexPaths(rowsToDelete))")
-        print("    rowsToUpdate: \(DCHelper.displayIndexPaths(rowsToUpdate))")
         print("    sectionsToInsert: \(sectionsToInsert)")
         print("    rowsToInsert: \(DCHelper.displayIndexPaths(rowsToInsert))")
         
         print("AnimateTableChangesEnd")
         
-        
-        
-    
+
         tableView.beginUpdates()
         
         // 1. remove sections
@@ -645,19 +658,13 @@ extension DCTableViewHandling {
         // 2. remove cells
         tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
         
-        
-        // 3. update cells
-        if withUpdates {
-            tableView.reloadRowsAtIndexPaths(rowsToUpdate, withRowAnimation: .None)
-        }
-
-        
-        // 4. insert sections
+    
+        // 3. insert sections
         for sectionIndex in sectionsToInsert {
             tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: insertAnimation)
         }
         
-        // 5. insert cells
+        // 4. insert cells
         tableView.insertRowsAtIndexPaths(rowsToInsert, withRowAnimation: insertAnimation)
         
         tableView.endUpdates()

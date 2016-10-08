@@ -10,9 +10,9 @@ import UIKit
 
 class RandomTableUpdatesViewController: DCTableViewController {
     
-    var customIteration: Int = 1
     var updateTimer: NSTimer!
     var sectionIndex = 0
+    var stepNumber = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +75,7 @@ class RandomTableUpdatesViewController: DCTableViewController {
             let cellDescription = CellDescription(
                 cellID: index,
                 cellType: .TestCell,
-                viewModel: "Cell \(index)"
+                viewModel: "Cell \(index) - Step \(stepNumber)"
             )
             
             cellDescriptions.append(cellDescription)
@@ -94,6 +94,7 @@ class RandomTableUpdatesViewController: DCTableViewController {
     {
         createDataSourceForTable(tableView)
         animateTableChanges(tableView, withUpdates: true, insertAnimation: .Fade, deleteAnimation: .Fade)
+        stepNumber += 1
     }
     
 }
