@@ -8,6 +8,8 @@
 
 import UIKit
 
+var enableDCTableViewControllerLoging = false
+
 func delay(delay: Double, closure: ()->()) {
     dispatch_after(
         dispatch_time(
@@ -517,7 +519,7 @@ extension DCTableViewHandling {
             return
         }
         
-        print("AnimateTableChangesStart")
+        if enableDCTableViewControllerLoging { print("AnimateTableChangesStart") }
         
         let visibleCells = tableView.visibleCells
         let visibleCellsIndexPaths = visibleCells.map { cell in
@@ -529,8 +531,6 @@ extension DCTableViewHandling {
         
         var rowsToInsert: [NSIndexPath] = []
         var rowsToDelete: [NSIndexPath] = []
-        var rowsToUpdate: [NSIndexPath] = []
-        
         
         let previousSectionIDs = structure.previousDataSourceSections.map { (section) -> Int in
             section.sectionID
@@ -562,34 +562,47 @@ extension DCTableViewHandling {
             }
         }
         
-        print("    previousSectionIDsFiltration.result \(previousSectionIDsFiltration.result)")
+        if enableDCTableViewControllerLoging {
+            print("    previousSectionIDsFiltration.result \(previousSectionIDsFiltration.result)")
+        }
         
         // Process rows for section common for previous and current arrays
         for sectionID in previousSectionIDsFiltration.result {
-            print("    Processing section '\(sectionID)")
+            if enableDCTableViewControllerLoging {  print("    Processing section '\(sectionID)") }
             
             let previousSectionIndex = self.tableView(tableView, indexOfSectionWithID: sectionID, currentState: false)!
             
             let currentSectionIndex = self.tableView(tableView, indexOfSectionWithID: sectionID, currentState: true)!
             
-            print("        previousSectionIndex \(previousSectionIndex), currentSectionIndex \(currentSectionIndex)")
+            if enableDCTableViewControllerLoging {
+                print("        previousSectionIndex \(previousSectionIndex), currentSectionIndex \(currentSectionIndex)")
+            }
             
             let previousSectionCellIDs = structure.previousDataSourceCells[previousSectionIndex].map({ cellDescription in
                 cellDescription.cellID!
             })
-            print("        previousSectionCellIDs \(previousSectionCellIDs)")
+            
+            if enableDCTableViewControllerLoging {
+                print("        previousSectionCellIDs \(previousSectionCellIDs)")
+            }
             
             let currentSectionCellIDs = structure.dataSourceCells[currentSectionIndex].map({ cellDescription in
                 cellDescription.cellID!
             })
-            print("        currentSectionCellIDs \(currentSectionCellIDs)")
+            
+            if enableDCTableViewControllerLoging {
+                print("        currentSectionCellIDs \(currentSectionCellIDs)")
+            }
             
             
             // Row deletion
             // Result when we delete items from previous array that are not in current array
             let previousSectionCellIDsFiltration = DCHelper.deleteUnusedPreviousValues(previousArray: previousSectionCellIDs, currentArray: currentSectionCellIDs)
-            print("        previousSectionCellIDsFiltration.result \(previousSectionCellIDsFiltration.result)")
-            print("        previousSectionCellIDsFiltration.deletion \(previousSectionCellIDsFiltration.deletion)")
+            
+            if enableDCTableViewControllerLoging {
+                print("        previousSectionCellIDsFiltration.result \(previousSectionCellIDsFiltration.result)")
+                print("        previousSectionCellIDsFiltration.deletion \(previousSectionCellIDsFiltration.deletion)")
+            }
             
             let sectionCellsToDelete = previousSectionCellIDsFiltration.deletion.map({ rowIndex in
                 NSIndexPath(forRow: rowIndex, inSection: previousSectionIndex)
@@ -634,18 +647,22 @@ extension DCTableViewHandling {
             let sectionCellsToInsert = DCHelper.insertionsInArray(previousArray: previousSectionCellIDsFiltration.result, currentArray: currentSectionCellIDs).map({ insertion in
                 NSIndexPath(forRow: insertion.position, inSection: currentSectionIndex)
             })
-            print("        sectionCellsToInsert \(DCHelper.displayIndexPaths(sectionCellsToInsert))")
+            if enableDCTableViewControllerLoging {
+                print("        sectionCellsToInsert \(DCHelper.displayIndexPaths(sectionCellsToInsert))")
+            }
             
             rowsToInsert += sectionCellsToInsert
         }
         
         
-        print("    sectionsToDelete: \(sectionsToDelete)")
-        print("    rowsToDelete: \(DCHelper.displayIndexPaths(rowsToDelete))")
-        print("    sectionsToInsert: \(sectionsToInsert)")
-        print("    rowsToInsert: \(DCHelper.displayIndexPaths(rowsToInsert))")
+        if enableDCTableViewControllerLoging {
+            print("    sectionsToDelete: \(sectionsToDelete)")
+            print("    rowsToDelete: \(DCHelper.displayIndexPaths(rowsToDelete))")
+            print("    sectionsToInsert: \(sectionsToInsert)")
+            print("    rowsToInsert: \(DCHelper.displayIndexPaths(rowsToInsert))")
         
-        print("AnimateTableChangesEnd")
+            print("AnimateTableChangesEnd")
+        }
         
 
         tableView.beginUpdates()

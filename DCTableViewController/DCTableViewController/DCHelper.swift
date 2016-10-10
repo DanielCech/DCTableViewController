@@ -128,7 +128,9 @@ class DCHelper: NSObject {
         
         for index in toDelete {
             if index > array.count {
-                print("deletion problem: \(index), array \(array)")
+                if enableDCTableViewControllerLoging {
+                    print("deletion problem: \(index), array \(array)")
+                }
             }
             else {
                 array.removeAtIndex(index)
@@ -137,7 +139,9 @@ class DCHelper: NSObject {
         
         for insertion in toInsert {
             if insertion.position > array.count {
-                print("insetion problem: \(insertion)")
+                if enableDCTableViewControllerLoging {
+                    print("insetion problem: \(insertion)")
+                }
             }
             else {
                 array.insert(insertion.value, atIndex: insertion.position)
