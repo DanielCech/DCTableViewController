@@ -42,16 +42,18 @@ We need to register the cells used in the table (from nib or class). This phase 
 #### 2. Registration of TableViews 
 We need to register tableView in controller. It will create the data structure associated with the table. If we have multiple tables, each one should have different *tag* property (used as a key)
 
-```registerTableView```
+    ```registerTableView```
 
-```struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
+```swift
+struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
 
     var dataSourceCells: [[C]] = []
     var previousDataSourceCells: [[C]] = []
     
     var dataSourceSections: [S] = []
     var previousDataSourceSections: [S] = []
-}```
+}
+```
 
 These arrays describes table content in current state and previous state. It is important for animated tableView changes
 
@@ -70,17 +72,21 @@ Because sometimes not all data that are necessary for cell creation are stored i
 
 Before cell update using cell view model:
 
-```func tableView(
+```swift
+func tableView(
         tableView: UITableView,
         willUpdateCell cell: UITableViewCell,
-        cellDescription: CellDescription)```
+        cellDescription: CellDescription)
+```
 
 After cell update using cell view model:
 
-```    func tableView(
+```swift
+    func tableView(
         tableView: UITableView,
         didUpdateCell cell: UITableViewCell,
-        cellDescription: CellDescription)```
+        cellDescription: CellDescription)
+```
 
 ### Batch updates
 delete - update - insert
