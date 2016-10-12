@@ -42,7 +42,7 @@ We need to register the cells used in the table (from nib or class). This phase 
 #### 2. Registration of TableViews 
 We need to register tableView in controller. It will create the data structure associated with the table. If we have multiple tables, each one should have different *tag* property (used as a key)
 
-registerTableView
+```registerTableView```
 
 ```struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
 
@@ -68,13 +68,15 @@ Table view cells should comply with DCTableViewCellProtocol.
 The cell knows the type of its view model and the cell makes the viewModel type casting. The cell is updated using its view model automatically.
 Because sometimes not all data that are necessary for cell creation are stored in cell viewModel. We can customize cell creation using these delegate methods. 
 
-Before cell update using cell view model
+Before cell update using cell view model:
+
 ```func tableView(
         tableView: UITableView,
         willUpdateCell cell: UITableViewCell,
         cellDescription: CellDescription)```
 
-After cell update using cell view model
+After cell update using cell view model:
+
 ```    func tableView(
         tableView: UITableView,
         didUpdateCell cell: UITableViewCell,
