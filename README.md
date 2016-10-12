@@ -1,11 +1,13 @@
 # DCTableViewController
 
+![Image](https://dl.dropboxusercontent.com/u/57198916/DataSourceChanges.gif)
+
 ### Why wrapper for table view handling?
 Possible problems when working with table views:
 
 1. Classic tableview handling is sometimes too low-level
     
-2. Working with indexpaths in complex and dynamicaly changing tables is painful
+2. Working with indexpaths in complex and dynamically changing tables is painful
 
 3. Animated table view changes are often source of crashes
    
@@ -13,7 +15,7 @@ Possible problems when working with table views:
 
 DCTableViewController library tries to solve these problems:  
 
-1. All you need to do is to describe the presented content in data source. TableView methods have default implementation that can be always customized.
+1. All you need to do is to describe the presented content in data source. TableView methods have hidden default implementation that can be always customized.
 
 2. Sections and cells are accessible using their ID instead of indextpath
 
@@ -63,7 +65,7 @@ CellDescription
 The initializer of this struct has default value for each parameter - flexible notation
 
 #### 4. Table view cell creation
-Table view cells should comply with DCTableViewCellProtocol.
+Table view cells should comply with *DCTableViewCellProtocol*.
 
 ```func updateCell(viewModel: Any, delegate: Any?)```
 
