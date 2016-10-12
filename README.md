@@ -23,8 +23,10 @@ DCTableViewController library tries to solve these problems:
 
 ### DCTableViewController
 
-DCTableViewController - wrapper for UITableViewControllerem
-DCTableSupportedViewController - wrapper for UIViewControllerem with table support
+*DCTableViewController* - wrapper for UITableViewController
+
+*DCTableSupportedViewController* - wrapper for UIViewController 
+with table support
 
 #### Features
 * Both these controllers shares the implementation using protocol extensions - DCTableViewHandling
@@ -32,10 +34,6 @@ DCTableSupportedViewController - wrapper for UIViewControllerem with table suppo
 * Multiple table support in one controller
 * Support for automatic animated table content changes
 * Based on MVVM pattern - cells have their own ViewModel (string, number, struct, class, tuple, …)
-
-Demo
-* Jak je udělané menu v DC-demu
-* Ukázka animovaných změn tabulek
 
 ### Life Cycle
 #### 1. Cell Registration
@@ -46,13 +44,14 @@ We need to register tableView in controller. It will create the data structure a
 
 registerTableView
 
-struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
+```struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
 
     var dataSourceCells: [[C]] = []
     var previousDataSourceCells: [[C]] = []
-
+    
     var dataSourceSections: [S] = []
     var previousDataSourceSections: [S] = []
+}```
 
 These arrays describes table content in current state and previous state. It is important for animated tableView changes
 
@@ -69,22 +68,22 @@ Table view cells should comply with DCTableViewCellProtocol.
 The cell knows the type of its view model and the cell makes the viewModel type casting. The cell is updated using its view model automatically.
 Because sometimes not all data that are necessary for cell creation are stored in cell viewModel. We can customize cell creation using these delegate methods. 
 
-  Before cell update using cell view model
-  func tableView(
+Before cell update using cell view model
+```func tableView(
         tableView: UITableView,
         willUpdateCell cell: UITableViewCell,
-        cellDescription: CellDescription)
+        cellDescription: CellDescription)```
 
-    After cell update using cell view model
-    func tableView(
+After cell update using cell view model
+```    func tableView(
         tableView: UITableView,
         didUpdateCell cell: UITableViewCell,
-        cellDescription: CellDescription)
+        cellDescription: CellDescription)```
 
 ### Batch updates
 delete - update - insert
 
 ### Open problems:
 * How to implement it more generically and avoid using Any as a type of viewModel? (associated types?)
-* How to make it more encapsulated and separate from the project (pod)?
+* How to make it more encapsulated and separated from the project (pod)?
   
