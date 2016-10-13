@@ -8,12 +8,26 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: DCTableSupportedViewController {
 
+    @IBOutlet var tableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        do {
+            try registerTableView(tableView)
+        }
+        catch {
+            print("Registration error")
+        }
+        
+        tableView.registerCellNib(MenuCell)
+        
+        createDataSourceForTable(tableView)
+        
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +36,48 @@ class MenuViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Table View
+    
+    func createDataSourceForTable(tableView: UITableView) {
+        
+        super.createDataSourceForTable(tableView)
+        
+        let sectionDescription = SectionDescription(
+            sectionID: 0,
+            footerHeight: { _ in 0.01 }
+        )
+        
+        let cellDescriptions = [
+            CellDescription(
+                cellID: 0,
+                cellType: .MenuCell,
+                viewModel: "Random Table Updates",
+                didSelectCell: { [weak self] _, _, indexPath in
+                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                    self?.performSegueWithIdentifier("ShowRandomUpdates", sender: self)
+                }
+            ),
+            CellDescription(
+                cellID: 1,
+                cellType: .MenuCell,
+                viewModel: "Custom Table Updates",
+                didSelectCell: { [weak self] _, _, indexPath in
+                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                    self?.performSegueWithIdentifier("ShowCustomUpdates", sender: self)
+                }
+            ),
+            CellDescription(
+                cellID: 1,
+                cellType: .MenuCell,
+                viewModel: "Infinite Loading List",
+                didSelectCell: { [weak self] _, _, indexPath in
+                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                    self?.performSegueWithIdentifier("ShowInfiniteList", sender: self)
+                }
+            )
+        ]
+        
+        self.tableView(tableView, addSection: sectionDescription, withCells: cellDescriptions)
     }
-    */
 
 }

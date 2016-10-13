@@ -8,8 +8,10 @@
 
 import UIKit
 
-class InfiniteLoadingViewController: UIViewController {
+class InfiniteLoadingViewController: DCTableSupportedViewController {
 
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

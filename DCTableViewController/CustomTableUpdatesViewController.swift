@@ -14,13 +14,13 @@ class CustomTableUpdatesViewController: DCTableViewController {
     var updateTimer: NSTimer!
     var sectionIndex = 0
     
-    var initialState =
+    var initialState: [(sectionID: Int, sectionCellIDs: [Int])] =
         [
             (sectionID: 0, sectionCellIDs: [0,1,5]),
             (sectionID: 2, sectionCellIDs: [0,1,2,3,4,5])
         ]
     
-    var finalState =
+    var finalState: [(sectionID: Int, sectionCellIDs: [Int])]  =
         [
             (sectionID: 0, sectionCellIDs: [0,1,2,3,4,5]),
             (sectionID: 1, sectionCellIDs: [0,1,2,5]),
@@ -36,7 +36,7 @@ class CustomTableUpdatesViewController: DCTableViewController {
             try registerTableView(tableView)
         }
         catch {
-            print("Error")
+            print("Registration error")
         }
         
         tableView.registerCellNib(TestCell)

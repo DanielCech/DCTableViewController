@@ -21,7 +21,7 @@ class RandomTableUpdatesViewController: DCTableViewController {
             try registerTableView(tableView)
         }
         catch {
-            print("Error")
+            print("Registration error")
         }
         
         tableView.registerCellNib(TestCell)

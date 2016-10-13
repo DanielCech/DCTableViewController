@@ -10,16 +10,6 @@ import UIKit
 
 var enableDCTableViewControllerLoging = false
 
-func delay(delay: Double, closure: ()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
-}
-
-
 enum DCTableViewError: ErrorType {
     case TagIsNotUnique
     case StructureNotFound
@@ -61,7 +51,6 @@ protocol DCTableViewHandling: class {
     ////////////////////////////////////////////////////////////////
     // Cell
     
-//    func protocolTableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, controller: UIViewController, currentState: Bool, cellDescription: CellDescription?) -> UITableViewCell
     func protocolTableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath, currentState: Bool, cellDescription: CellDescription?) -> CGFloat
     func protocolTableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath, currentState: Bool, cellDescription: CellDescription?) -> CGFloat
     
@@ -166,7 +155,6 @@ extension DCTableViewHandling {
     }
 
     
-    // Check reload parameter
     func createDataSourceForTable(tableView: UITableView)
     {
         var structure = structureForTable(tableView)
@@ -449,7 +437,16 @@ extension DCTableViewHandling {
     func tableView(tableView: UITableView, reloadSectionWithID sectionID: Int, rowAnimation: UITableViewRowAnimation = .Automatic)
     {
         if let sectionIndex = self.tableView(tableView, indexOfSectionWithID: sectionID, currentState: true) {
+            
+            do {
+                try ObjC.catchException {
             tableView.reloadSections(NSIndexSet(index: sectionIndex), withRowAnimation: rowAnimation)
+        }
+    }
+            catch let error {
+                print("An error ocurred: \(error)")
+                tableView.reloadData()
+            }
         }
     }
     

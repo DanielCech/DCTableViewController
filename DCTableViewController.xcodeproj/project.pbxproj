@@ -23,6 +23,13 @@
 		373F824E1DA53BF500DD469C /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F824C1DA53BF500DD469C /* TestCell.swift */; };
 		373F824F1DA53BF500DD469C /* TestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373F824D1DA53BF500DD469C /* TestCell.xib */; };
 		377D42FE1DA5B14800A3BF8D /* DCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D42FD1DA5B14800A3BF8D /* DCHelper.swift */; };
+		37C6DAFB1DAF8D65002DE60F /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DAFA1DAF8D65002DE60F /* MenuViewController.swift */; };
+		37C6DAFE1DAF9692002DE60F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DAFC1DAF9692002DE60F /* MenuCell.swift */; };
+		37C6DAFF1DAF9692002DE60F /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C6DAFD1DAF9692002DE60F /* MenuCell.xib */; };
+		37C6DB011DAFC0E8002DE60F /* InfiniteLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB001DAFC0E7002DE60F /* InfiniteLoadingViewController.swift */; };
+		37C6DB041DAFC213002DE60F /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB021DAFC213002DE60F /* LoadingCell.swift */; };
+		37C6DB051DAFC213002DE60F /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C6DB031DAFC213002DE60F /* LoadingCell.xib */; };
+		37C6DB0D1DB04113002DE60F /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB0C1DB04113002DE60F /* ObjC.m */; };
 		37F69C161D8623B100405F95 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F69C151D8623B100405F95 /* ReusableView.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +52,15 @@
 		373F824C1DA53BF500DD469C /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		373F824D1DA53BF500DD469C /* TestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell.xib; sourceTree = "<group>"; };
 		377D42FD1DA5B14800A3BF8D /* DCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCHelper.swift; sourceTree = "<group>"; };
+		37C6DAFA1DAF8D65002DE60F /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		37C6DAFC1DAF9692002DE60F /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		37C6DAFD1DAF9692002DE60F /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		37C6DB001DAFC0E7002DE60F /* InfiniteLoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteLoadingViewController.swift; sourceTree = "<group>"; };
+		37C6DB021DAFC213002DE60F /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		37C6DB031DAFC213002DE60F /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		37C6DB0A1DB04112002DE60F /* DCTableViewController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "DCTableViewController-Bridging-Header.h"; path = "DCTableViewController/DCTableViewController-Bridging-Header.h"; sourceTree = "<group>"; };
+		37C6DB0B1DB04113002DE60F /* ObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjC.h; sourceTree = "<group>"; };
+		37C6DB0C1DB04113002DE60F /* ObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjC.m; sourceTree = "<group>"; };
 		37F69C151D8623B100405F95 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,11 +99,14 @@
 				37F69C151D8623B100405F95 /* ReusableView.swift */,
 				37118A5D1D815E4C006970BD /* AppDelegate.swift */,
 				37118A661D815E4C006970BD /* Assets.xcassets */,
+				37C6DB0A1DB04112002DE60F /* DCTableViewController-Bridging-Header.h */,
 				37118A6B1D815E4C006970BD /* Info.plist */,
 				37118A681D815E4C006970BD /* LaunchScreen.storyboard */,
 				37118A631D815E4C006970BD /* Main.storyboard */,
 				37118A5F1D815E4C006970BD /* RandomTableUpdatesViewController.swift */,
 				3724CB2A1DA7A1C9003AAC37 /* CustomTableUpdatesViewController.swift */,
+				37C6DAFA1DAF8D65002DE60F /* MenuViewController.swift */,
+				37C6DB001DAFC0E7002DE60F /* InfiniteLoadingViewController.swift */,
 			);
 			path = DCTableViewController;
 			sourceTree = "<group>";
@@ -95,6 +114,8 @@
 		373F823C1DA50BCE00DD469C /* DCTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				37C6DB0B1DB04113002DE60F /* ObjC.h */,
+				37C6DB0C1DB04113002DE60F /* ObjC.m */,
 				373F823D1DA50BCE00DD469C /* DCCellDescription.swift */,
 				373F823E1DA50BCE00DD469C /* DCSectionDescription.swift */,
 				373F823F1DA50BCE00DD469C /* DCTableSupportedViewController.swift */,
@@ -112,6 +133,10 @@
 			children = (
 				373F824C1DA53BF500DD469C /* TestCell.swift */,
 				373F824D1DA53BF500DD469C /* TestCell.xib */,
+				37C6DAFC1DAF9692002DE60F /* MenuCell.swift */,
+				37C6DAFD1DAF9692002DE60F /* MenuCell.xib */,
+				37C6DB021DAFC213002DE60F /* LoadingCell.swift */,
+				37C6DB031DAFC213002DE60F /* LoadingCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -178,6 +203,8 @@
 			files = (
 				37118A6A1D815E4C006970BD /* LaunchScreen.storyboard in Resources */,
 				373F824F1DA53BF500DD469C /* TestCell.xib in Resources */,
+				37C6DB051DAFC213002DE60F /* LoadingCell.xib in Resources */,
+				37C6DAFF1DAF9692002DE60F /* MenuCell.xib in Resources */,
 				37118A671D815E4C006970BD /* Assets.xcassets in Resources */,
 				37118A651D815E4C006970BD /* Main.storyboard in Resources */,
 			);
@@ -193,13 +220,18 @@
 				37F69C161D8623B100405F95 /* ReusableView.swift in Sources */,
 				373F824E1DA53BF500DD469C /* TestCell.swift in Sources */,
 				377D42FE1DA5B14800A3BF8D /* DCHelper.swift in Sources */,
+				37C6DAFB1DAF8D65002DE60F /* MenuViewController.swift in Sources */,
 				373F82481DA50BCE00DD469C /* DCTableViewController.swift in Sources */,
 				37118A601D815E4C006970BD /* RandomTableUpdatesViewController.swift in Sources */,
 				3724CB2B1DA7A1C9003AAC37 /* CustomTableUpdatesViewController.swift in Sources */,
 				37118A5E1D815E4C006970BD /* AppDelegate.swift in Sources */,
 				373F82441DA50BCE00DD469C /* DCCellDescription.swift in Sources */,
+				37C6DB011DAFC0E8002DE60F /* InfiniteLoadingViewController.swift in Sources */,
 				373F82491DA50BCE00DD469C /* DCTableViewHandling.swift in Sources */,
+				37C6DB0D1DB04113002DE60F /* ObjC.m in Sources */,
+				37C6DB041DAFC213002DE60F /* LoadingCell.swift in Sources */,
 				373F824A1DA50BCE00DD469C /* DCTableViewStructure.swift in Sources */,
+				37C6DAFE1DAF9692002DE60F /* MenuCell.swift in Sources */,
 				373F82471DA50BCE00DD469C /* DCTableViewCellProtocol.swift in Sources */,
 				373F82451DA50BCE00DD469C /* DCSectionDescription.swift in Sources */,
 				373F82461DA50BCE00DD469C /* DCTableSupportedViewController.swift in Sources */,
@@ -317,6 +349,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DCTableViewController/Info.plist;
@@ -324,6 +357,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dc.DCTableViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "DCTableViewController/DCTableViewController/DCTableViewController-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
@@ -332,6 +367,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DCTableViewController/Info.plist;
@@ -339,6 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = dc.DCTableViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "DCTableViewController/DCTableViewController/DCTableViewController-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};
 			name = Release;

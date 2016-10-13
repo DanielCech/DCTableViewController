@@ -8,8 +8,10 @@
 
 import UIKit
 
-class MenuCell: UITableViewCell {
+class MenuCell: UITableViewCell, DCTableViewCellProtocol, ReusableView {
 
+    @IBOutlet var label: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +23,10 @@ class MenuCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    func updateCell(viewModel viewModel: Any, delegate: Any?) {
+        guard let unwrappedViewModel = viewModel as? String else { return }
+        
+        label.text = unwrappedViewModel
+    }
 }

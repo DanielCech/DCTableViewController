@@ -39,12 +39,20 @@ with table support
 
 ### Life Cycle
 #### 1. Cell Registration
-We need to register the cells used in the table (from nib or class). This phase is not handled by DCTableViewControllerNot part of DCTableViewController. ReusableView (FromNib) from Allan & Luca. Requirement: reuse identifier is equal to class name. 
+We need to register the cells used in the table (from nib or class). This phase is not handled by DCTableViewController. You can use *registerNib:forCellWithReuseIdentifier:* and *registerClass:forCellWithReuseIdentifier:* or preferably *ReusableView* (*FromNib*) protocol from Allan & Luca. Requirement: reuse identifier is equal to class name. 
+[iOS-Swiftility](https://github.com/allbto/iOS-Swiftility)
 
 #### 2. Registration of TableViews 
 We need to register tableView in controller. It will create the data structure associated with the table. If we have multiple tables, each one should have different *tag* property (used as a key)
 
-    ```registerTableView```
+```swift
+	do {
+		try registerTableView(tableView)
+	}
+	catch {
+		print("Registration error")
+	}
+```
 
 ```swift
 struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
@@ -60,16 +68,19 @@ struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
 These arrays describes table content in current state and previous state. It is important for animated tableView changes
 
 #### 3. Create data source for the table
-SectionDescription
-CellDescription
-The initializer of this struct has default value for each parameter - flexible notation
+In function 
+```swift
+func createDataSourceForTable(tableView: UITableView)  
+```
+
+Using structs *SectionDescription* & *CellDescription*. The initializers of these struct has default value for each parameter - flexible notation.
 
 #### 4. Table view cell creation
-Table view cells should comply with *DCTableViewCellProtocol*.
+Table view cells should comply with *DCTableViewCellProtocol* (optional). The function updateCell is then used for updating the cell using viewModel.
 
 ```func updateCell(viewModel: Any, delegate: Any?)```
 
-The cell knows the type of its view model and the cell makes the viewModel type casting. The cell is updated using its view model automatically.
+The cell knows the type of its view model and the cell makes the necessary viewModel type casting. The cell is updated using its view model automatically.
 Because sometimes not all data that are necessary for cell creation are stored in cell viewModel. We can customize cell creation using these delegate methods. 
 
 Before cell update using cell view model:
@@ -90,8 +101,12 @@ After cell update using cell view model:
         cellDescription: CellDescription)
 ```
 
-### Batch updates
-delete - update - insert
+### Batch table updates
+1. Setup the initial tableView state
+2. Call createDataSource
+3. Call animateTableChanges instead of reloadData
+
+Batch update is sequence of insert, delete and update operations on cells and sections. Algorithm in DCTableViewController assumes that **IDs of sections and cells are in ascending order**.
 
 ### Open problems:
 * How to implement it more generically and avoid using Any as a type of viewModel? (associated types?)

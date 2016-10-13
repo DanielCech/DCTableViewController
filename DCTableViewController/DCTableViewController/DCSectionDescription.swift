@@ -18,11 +18,10 @@ protocol SectionDescribing {
     
     var headerTitle: String? { get set }
     var headerHeight: ((sectionDescription: Self, section: Int) -> CGFloat)? { get set }
-//    var estimatedHeaderHeight: ((sectionDescription: Self, section: Int) -> CGFloat)? { get set }
     
     var footerTitle: String? { get set }
     var footerHeight: ((sectionDescription: Self, section: Int) -> CGFloat)? { get set }
-//    var estimatedFooterHeight: ((sectionDescription: Self, section: Int) -> CGFloat)? { get set }
+
 }
 
 
@@ -39,7 +38,6 @@ struct SectionDescription: SectionDescribing {
     
     var footerTitle: String? = nil
     var footerHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
-//    var estimatedFooterHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
     
     init(
         sectionID: Int,
@@ -47,11 +45,9 @@ struct SectionDescription: SectionDescribing {
         
         headerTitle: String? = nil,
         headerHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil,
-//        estimatedHeaderHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil,
         
         footerTitle: String? = nil,
         footerHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
-//        estimatedFooterHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
         )
     {
         self.sectionID = sectionID
@@ -59,11 +55,9 @@ struct SectionDescription: SectionDescribing {
         
         self.headerTitle = headerTitle
         self.headerHeight = headerHeight
-//        self.estimatedHeaderHeight = estimatedHeaderHeight
         
         self.footerTitle = footerTitle
         self.footerHeight = footerHeight
-//        self.estimatedFooterHeight = estimatedFooterHeight
     }
 }
 
