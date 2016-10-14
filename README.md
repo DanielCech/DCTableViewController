@@ -72,10 +72,10 @@ In function
 func createDataSourceForTable(tableView: UITableView)  
 ```
 
-Using structs *SectionDescription* & *CellDescription*. The initializers of these struct has default value for each parameter - flexible notation.
+Using structs *SectionDescription* & *CellDescription*. The initializers of these structs have default value for each parameter - flexible notation.
 
 #### 4. Table view cell creation
-Table view cells should comply with *DCTableViewCellProtocol* (optional). The function updateCell is then used for updating the cell using viewModel.
+Table view cells should conform to *DCTableViewCellProtocol* (optional). The function updateCell is then used for updating the cell using viewModel.
 
 ```func updateCell(viewModel: Any, delegate: Any?)```
 
