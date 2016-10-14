@@ -1,6 +1,6 @@
-#import "ObjC.h"
+#import "DCExceptionHandler.h"
 
-@implementation ObjC
+@implementation DCExceptionHandler
 
 + (BOOL)catchException:(void(^)())tryBlock error:(__autoreleasing NSError **)error {
     @try {

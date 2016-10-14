@@ -103,8 +103,8 @@ After cell update using cell view model:
 
 ### Batch table updates
 1. Setup the initial tableView state
-2. Call createDataSource
-3. Call animateTableChanges instead of reloadData
+2. Call *createDataSourceForTable*
+3. Call *animateTableChanges* instead of reloadData
 
 Batch update is sequence of insert, delete and update operations on cells and sections. Algorithm in DCTableViewController assumes that **IDs of sections and cells are in ascending order**.
 

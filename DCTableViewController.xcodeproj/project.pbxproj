@@ -22,6 +22,7 @@
 		373F824A1DA50BCE00DD469C /* DCTableViewStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F82431DA50BCE00DD469C /* DCTableViewStructure.swift */; };
 		373F824E1DA53BF500DD469C /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F824C1DA53BF500DD469C /* TestCell.swift */; };
 		373F824F1DA53BF500DD469C /* TestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373F824D1DA53BF500DD469C /* TestCell.xib */; };
+		3775B7EB1DB0C3440038FAC8 /* DCExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3775B7EA1DB0C3440038FAC8 /* DCExceptionHandler.m */; };
 		377D42FE1DA5B14800A3BF8D /* DCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D42FD1DA5B14800A3BF8D /* DCHelper.swift */; };
 		37C6DAFB1DAF8D65002DE60F /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DAFA1DAF8D65002DE60F /* MenuViewController.swift */; };
 		37C6DAFE1DAF9692002DE60F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DAFC1DAF9692002DE60F /* MenuCell.swift */; };
@@ -29,7 +30,6 @@
 		37C6DB011DAFC0E8002DE60F /* InfiniteLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB001DAFC0E7002DE60F /* InfiniteLoadingViewController.swift */; };
 		37C6DB041DAFC213002DE60F /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB021DAFC213002DE60F /* LoadingCell.swift */; };
 		37C6DB051DAFC213002DE60F /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C6DB031DAFC213002DE60F /* LoadingCell.xib */; };
-		37C6DB0D1DB04113002DE60F /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C6DB0C1DB04113002DE60F /* ObjC.m */; };
 		37F69C161D8623B100405F95 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F69C151D8623B100405F95 /* ReusableView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +51,8 @@
 		373F82431DA50BCE00DD469C /* DCTableViewStructure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCTableViewStructure.swift; sourceTree = "<group>"; };
 		373F824C1DA53BF500DD469C /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		373F824D1DA53BF500DD469C /* TestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell.xib; sourceTree = "<group>"; };
+		3775B7E91DB0C3440038FAC8 /* DCExceptionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCExceptionHandler.h; sourceTree = "<group>"; };
+		3775B7EA1DB0C3440038FAC8 /* DCExceptionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCExceptionHandler.m; sourceTree = "<group>"; };
 		377D42FD1DA5B14800A3BF8D /* DCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCHelper.swift; sourceTree = "<group>"; };
 		37C6DAFA1DAF8D65002DE60F /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		37C6DAFC1DAF9692002DE60F /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -59,8 +61,6 @@
 		37C6DB021DAFC213002DE60F /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		37C6DB031DAFC213002DE60F /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		37C6DB0A1DB04112002DE60F /* DCTableViewController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "DCTableViewController-Bridging-Header.h"; path = "DCTableViewController/DCTableViewController-Bridging-Header.h"; sourceTree = "<group>"; };
-		37C6DB0B1DB04113002DE60F /* ObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjC.h; sourceTree = "<group>"; };
-		37C6DB0C1DB04113002DE60F /* ObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjC.m; sourceTree = "<group>"; };
 		37F69C151D8623B100405F95 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,8 +114,8 @@
 		373F823C1DA50BCE00DD469C /* DCTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				37C6DB0B1DB04113002DE60F /* ObjC.h */,
-				37C6DB0C1DB04113002DE60F /* ObjC.m */,
+				3775B7E91DB0C3440038FAC8 /* DCExceptionHandler.h */,
+				3775B7EA1DB0C3440038FAC8 /* DCExceptionHandler.m */,
 				373F823D1DA50BCE00DD469C /* DCCellDescription.swift */,
 				373F823E1DA50BCE00DD469C /* DCSectionDescription.swift */,
 				373F823F1DA50BCE00DD469C /* DCTableSupportedViewController.swift */,
@@ -228,8 +228,8 @@
 				373F82441DA50BCE00DD469C /* DCCellDescription.swift in Sources */,
 				37C6DB011DAFC0E8002DE60F /* InfiniteLoadingViewController.swift in Sources */,
 				373F82491DA50BCE00DD469C /* DCTableViewHandling.swift in Sources */,
-				37C6DB0D1DB04113002DE60F /* ObjC.m in Sources */,
 				37C6DB041DAFC213002DE60F /* LoadingCell.swift in Sources */,
+				3775B7EB1DB0C3440038FAC8 /* DCExceptionHandler.m in Sources */,
 				373F824A1DA50BCE00DD469C /* DCTableViewStructure.swift in Sources */,
 				37C6DAFE1DAF9692002DE60F /* MenuCell.swift in Sources */,
 				373F82471DA50BCE00DD469C /* DCTableViewCellProtocol.swift in Sources */,

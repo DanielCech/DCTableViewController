@@ -439,7 +439,7 @@ extension DCTableViewHandling {
         if let sectionIndex = self.tableView(tableView, indexOfSectionWithID: sectionID, currentState: true) {
             
             do {
-                try ObjC.catchException {
+                try DCExceptionHandler.catchException {
             tableView.reloadSections(NSIndexSet(index: sectionIndex), withRowAnimation: rowAnimation)
         }
     }
