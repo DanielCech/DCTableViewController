@@ -1,27 +1,26 @@
 # DCTableViewController
+DCTableViewController is convenience wrapper for UITableViews in controllers. It can simplify the work with tables. 
 
 ![Image](https://dl.dropboxusercontent.com/u/57198916/DataSourceChanges.gif)
 
 ### Why wrapper for table view handling?
 Possible problems when working with table views:
 
-1. Classic tableview handling is sometimes too low-level
-    
-2. Working with indexpaths in complex and dynamically changing tables is painful
+- Problem 1
+    - **Cocoa**: Classic tableview handling is sometimes too low-level
+    - **DCTableViewController**: All you need to do is to describe the presented content in data source. TableView methods have hidden default implementation that can be always customized.
 
-3. Animated table view changes are often source of crashes
-   
-4. Data source of table is described in procedural rather than declarative way
+- Problem 2 
+    - **Cocoa**: Working with indexpaths in complex and dynamically changing tables is painful
+    - **DCTableViewController**: Sections and cells are accessible using their ID instead of indextpath
 
-DCTableViewController library tries to solve these problems:  
-
-1. All you need to do is to describe the presented content in data source. TableView methods have hidden default implementation that can be always customized.
-
-2. Sections and cells are accessible using their ID instead of indextpath
-
-3. Animated table changes are created automatically by checking the changes in data source (the previous and the current state of table)
-
-4. Content is described using flexible expressions
+- Problem 3
+     - **Cocoa**: Animated table view changes are often source of crashes
+     - **DCTableViewController**: Animated table changes are created automatically by checking the changes in data source (the previous and the current state of table)
+  
+- Problem 4
+    - **Cocoa**: Data source of table is described in procedural rather than declarative way
+    - **DCTableViewController**: Content is described using flexible declarative expressions
 
 ### DCTableViewController
 
@@ -104,7 +103,7 @@ After cell update using cell view model:
 ### Batch table updates
 1. Setup the initial tableView state
 2. Call *createDataSourceForTable*
-3. Call *animateTableChanges* instead of reloadData
+3. Call *animateTableChanges* instead of *reloadData*
 
 Batch update is sequence of insert, delete and update operations on cells and sections. Algorithm in DCTableViewController assumes that **IDs of sections and cells are in ascending order**.
 
