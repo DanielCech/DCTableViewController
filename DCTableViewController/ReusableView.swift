@@ -1,6 +1,6 @@
 //
 //  ReusableView.swift
-//  Rednote
+//  DCTableViewController
 //
 //  Created by Luca D'Alberti on 8/26/16.
 //  Part of code from Allan Barbato

@@ -67,7 +67,7 @@ class MenuViewController: DCTableSupportedViewController {
                 }
             ),
             CellDescription(
-                cellID: 1,
+                cellID: 2,
                 cellType: .MenuCell,
                 viewModel: "Infinite Loading List",
                 didSelectCell: { [weak self] _, _, indexPath in

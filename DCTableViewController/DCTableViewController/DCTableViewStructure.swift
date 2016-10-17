@@ -1,6 +1,6 @@
 //
 //  DCTableViewStructure.swift
-//  Rednote
+//  DCTableViewController
 //
 //  Created by Dan on 22.03.16.
 //  Copyright © 2016 STRV. All rights reserved.
