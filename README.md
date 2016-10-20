@@ -22,6 +22,51 @@ Possible problems when working with table views:
     - **Cocoa**: Data source of table is described in procedural rather than declarative way
     - **DCTableViewController**: Content is described using flexible declarative expressions
 
+The table definition using DCTableViewController can look like this:
+
+```swift
+func createDataSourceForTable(tableView: UITableView) {
+        
+    super.createDataSourceForTable(tableView)
+    
+    let sectionDescription = SectionDescription(
+        sectionID: 0,
+        footerHeight: { _ in 0.01 }
+    )
+    
+    let cellDescriptions = [
+        CellDescription(
+            cellID: 0,
+            cellType: .MenuCell,
+            viewModel: "Random Table Updates",
+            didSelectCell: { [weak self] _, _, indexPath in
+                self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                self?.performSegueWithIdentifier("ShowRandomUpdates", sender: self)
+            }
+        ),
+        CellDescription(
+            cellID: 1,
+            cellType: .MenuCell,
+            viewModel: "Custom Table Updates",
+            didSelectCell: { [weak self] _, _, indexPath in
+                self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                self?.performSegueWithIdentifier("ShowCustomUpdates", sender: self)
+            }
+        ),
+        CellDescription(
+            cellID: 2,
+            cellType: .MenuCell,
+            viewModel: "Infinite Loading List",
+            didSelectCell: { [weak self] _, _, indexPath in
+                self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                self?.performSegueWithIdentifier("ShowInfiniteList", sender: self)
+            }
+        )
+    ]
+    
+    self.tableView(tableView, addSection: sectionDescription, withCells: cellDescriptions)
+}
+```
 ### DCTableViewController
 
 *DCTableViewController* - wrapper for UITableViewController
