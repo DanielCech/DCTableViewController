@@ -1,7 +1,7 @@
 # DCTableViewController
 DCTableViewController is convenience wrapper for UITableViews in controllers. It can simplify the work with tables. 
 
-![Image](https://dl.dropboxusercontent.com/content_link/1bDtmxykQk11iGCZjxWlIFvXZfeeowkJ3hkrUJ2vwg1W1Lw921NzoSibBFlUmqdd/file)
+![Image](https://image.ibb.co/kLRcfa/Data_Source_Changes.gif)
 
 ### Why wrapper for table view handling?
 Possible problems when working with table views:
