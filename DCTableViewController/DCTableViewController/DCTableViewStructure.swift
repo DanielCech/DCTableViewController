@@ -30,7 +30,7 @@ struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
      - parameter current: current of previous state of table
      - returns: array for each section containing cell descriptions
      */
-    func getDataSourceCells(currentState: Bool) -> [[C]]
+    func getDataSourceCells(_ currentState: Bool) -> [[C]]
     {
         if currentState {
             return dataSourceCells
@@ -45,7 +45,7 @@ struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
      - parameter current: current of previous state of table
      - returns: array of section descriptions
      */
-    func getDataSourceSections(currentState: Bool) -> [S]
+    func getDataSourceSections(_ currentState: Bool) -> [S]
     {
         if currentState {
             return dataSourceSections
@@ -62,7 +62,7 @@ struct DCTableViewStructure<C: CellDescribing, S: SectionDescribing> {
      - parameter current:   current of previous state of table
      - returns: index of section or nil
      */
-    func indexOfSectionWithID(sectionID: Int, currentState: Bool = true) -> Int?
+    func indexOfSectionWithID(_ sectionID: Int, currentState: Bool = true) -> Int?
     {
         var index = 0
         

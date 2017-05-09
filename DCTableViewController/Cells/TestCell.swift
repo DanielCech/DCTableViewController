@@ -17,14 +17,14 @@ class TestCell: UITableViewCell, DCTableViewCellProtocol, ReusableView {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
     
-    func updateCell(viewModel viewModel: Any, delegate: Any?) {
+    func updateCell(viewModel: Any, delegate: Any?) {
         guard let unwrappedViewModel = viewModel as? String else { return }
         
         contentLabel.text = unwrappedViewModel

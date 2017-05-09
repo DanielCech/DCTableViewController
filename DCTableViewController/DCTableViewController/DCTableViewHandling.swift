@@ -7,14 +7,27 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 var enableDCTableViewControllerLoging = false
 
-enum DCTableViewError: ErrorType {
-    case TagIsNotUnique
-    case StructureNotFound
-    case SectionIndexOutOfBounds
-    case RowIndexOutOfBounds
+enum DCTableViewError: Error {
+    case tagIsNotUnique
+    case structureNotFound
+    case sectionIndexOutOfBounds
+    case rowIndexOutOfBounds
 }
 
 protocol DCTableViewHandling: class {
@@ -28,98 +41,98 @@ protocol DCTableViewHandling: class {
     ////////////////////////////////////////////////////////////////
     // MARK: - Table setup
     
-    func registerTableView(tableView: UITableView) throws
+    func registerTableView(_ tableView: UITableView) throws
     
-    func createDataSourceForTable(tableView: UITableView)
+    func createDataSourceForTable(_ tableView: UITableView)
     
-    func structureForTable(table: UITableView) -> DCTableViewStructure<CellDescription, SectionDescription>?
+    func structureForTable(_ table: UITableView) -> DCTableViewStructure<CellDescription, SectionDescription>?
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         addSection section: SectionDescription,
         withCells cells: [CellDescription])
     
-    func clearPreviousTableState(tableView: UITableView)
+    func clearPreviousTableState(_ tableView: UITableView)
     
 
     ////////////////////////////////////////////////////////////////
     // MARK: - TableView data source methods
     
-    func protocolNumberOfSectionsInTableView(tableView: UITableView, currentState: Bool) -> Int
-    func protocolTableView(tableView: UITableView, numberOfRowsInSection section: Int, currentState: Bool) -> Int
+    func protocolNumberOfSectionsInTableView(_ tableView: UITableView, currentState: Bool) -> Int
+    func protocolTableView(_ tableView: UITableView, numberOfRowsInSection section: Int, currentState: Bool) -> Int
     
     ////////////////////////////////////////////////////////////////
     // Cell
     
-    func protocolTableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath, currentState: Bool, cellDescription: CellDescription?) -> CGFloat
-    func protocolTableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath, currentState: Bool, cellDescription: CellDescription?) -> CGFloat
+    func protocolTableView(_ tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath, currentState: Bool, cellDescription: CellDescription?) -> CGFloat
+    func protocolTableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath, currentState: Bool, cellDescription: CellDescription?) -> CGFloat
     
     ////////////////////////////////////////////////////////////////
     // Header
     
-    func protocolTableView(tableView: UITableView, titleForHeaderInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> String?
+    func protocolTableView(_ tableView: UITableView, titleForHeaderInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> String?
 
-    func protocolTableView(tableView: UITableView, heightForHeaderInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> CGFloat
+    func protocolTableView(_ tableView: UITableView, heightForHeaderInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> CGFloat
     
     
     ////////////////////////////////////////////////////////////////
     // Footer
     
-    func protocolTableView(tableView: UITableView, titleForFooterInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> String?
+    func protocolTableView(_ tableView: UITableView, titleForFooterInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> String?
     
-    func protocolTableView(tableView: UITableView, heightForFooterInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> CGFloat
+    func protocolTableView(_ tableView: UITableView, heightForFooterInSection section: Int, currentState: Bool, sectionDescription: SectionDescription?) -> CGFloat
     
     
     ////////////////////////////////////////////////////////////////
     // Delegate
     
-    func protocolTableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath, cellDescription: CellDescription?)
+    func protocolTableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath, cellDescription: CellDescription?)
     
-    func protocolTableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath, cellDescription: CellDescription?)
+    func protocolTableView(_ tableView: UITableView, didDeselectRowAtIndexPath indexPath: IndexPath, cellDescription: CellDescription?)
 
     
     ////////////////////////////////////////////////////////////////
     // MARK: - Access using sectionID and cellID
 
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         descriptionForCellWithID cellID: Int,
         inSectionWithID sectionID: Int,
         currentState: Bool) -> CellDescription?
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         descriptionForSectionWithID section: Int,
         currentState: Bool) -> SectionDescription?
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         titleForHeaderInSectionWithID sectionID: Int,
         currentState: Bool) -> String?
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         sectionIDForSectionIndex section: Int,
         currentState: Bool) -> Int?
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         indexOfSectionWithID sectionID: Int,
         currentState: Bool) -> Int?
     
-    func tableView(tableView: UITableView, reloadSectionWithID sectionID: Int, rowAnimation: UITableViewRowAnimation)
+    func tableView(_ tableView: UITableView, reloadSectionWithID sectionID: Int, rowAnimation: UITableViewRowAnimation)
     
     
     ////////////////////////////////////////////////////////////////
     // MARK: - Access using indexPath
     
     func tableView(
-        tableView: UITableView,
-        descriptionForCellAtIndexPath indexPath: NSIndexPath,
+        _ tableView: UITableView,
+        descriptionForCellAtIndexPath indexPath: IndexPath,
         currentState: Bool) -> CellDescription?
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         descriptionForSection section: Int,
         currentState: Bool) -> SectionDescription?
     
@@ -128,7 +141,7 @@ protocol DCTableViewHandling: class {
     // MARK: - Animated table changes
     
     func animateTableChanges(
-        tableView: UITableView,
+        _ tableView: UITableView,
         withUpdates: Bool,
         inSections: [Int]?,
         insertAnimation: UITableViewRowAnimation,
@@ -143,10 +156,10 @@ extension DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Table setup
     
-    func registerTableView(tableView: UITableView) throws
+    func registerTableView(_ tableView: UITableView) throws
     {
         if tableStructures[tableView.tag] != nil {
-            throw DCTableViewError.TagIsNotUnique
+            throw DCTableViewError.tagIsNotUnique
         }
         
         let structure = DCTableViewStructure<CellDescription, SectionDescription>() //DCTableViewStructure<CellDescription, SectionDescription>()
@@ -155,7 +168,7 @@ extension DCTableViewHandling {
     }
 
     
-    func createDataSourceForTable(tableView: UITableView)
+    func createDataSourceForTable(_ tableView: UITableView)
     {
         var structure = structureForTable(tableView)
         if structure == nil {
@@ -173,7 +186,7 @@ extension DCTableViewHandling {
     }
     
     
-    func structureForTable(table: UITableView) -> DCTableViewStructure<CellDescription, SectionDescription>?
+    func structureForTable(_ table: UITableView) -> DCTableViewStructure<CellDescription, SectionDescription>?
     {
         let structure = tableStructures[table.tag]
         
@@ -186,7 +199,7 @@ extension DCTableViewHandling {
     
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         addSection section: SectionDescription,
         withCells cells: [CellDescription])
     {
@@ -202,7 +215,7 @@ extension DCTableViewHandling {
     }
     
     
-    func clearPreviousTableState(tableView: UITableView)
+    func clearPreviousTableState(_ tableView: UITableView)
     {
         var structure = structureForTable(tableView)
         if structure == nil {
@@ -216,7 +229,7 @@ extension DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // MARK: - TableView data source methods
     
-    func protocolNumberOfSectionsInTableView(tableView: UITableView, currentState: Bool = true) -> Int
+    func protocolNumberOfSectionsInTableView(_ tableView: UITableView, currentState: Bool = true) -> Int
     {
         let structure = structureForTable(tableView)
         if structure == nil {
@@ -227,7 +240,7 @@ extension DCTableViewHandling {
     }
     
     
-    func protocolTableView(tableView: UITableView, numberOfRowsInSection section: Int, currentState: Bool = true) -> Int
+    func protocolTableView(_ tableView: UITableView, numberOfRowsInSection section: Int, currentState: Bool = true) -> Int
     {
         let structure = structureForTable(tableView)
         if structure == nil {
@@ -248,14 +261,14 @@ extension DCTableViewHandling {
     
 
     func protocolTableView(
-        tableView: UITableView,
-        estimatedHeightForRowAtIndexPath indexPath: NSIndexPath,
+        _ tableView: UITableView,
+        estimatedHeightForRowAtIndexPath indexPath: IndexPath,
         currentState: Bool = true,
         cellDescription: CellDescription? = nil) -> CGFloat
     {
         if let cellDescription = cellDescription ?? self.tableView(tableView, descriptionForCellAtIndexPath: indexPath, currentState: true) {
             if let unwrappedEstimatedCellHeight = cellDescription.estimatedCellHeight {
-                return unwrappedEstimatedCellHeight(cellDescription: cellDescription, indexPath: indexPath)
+                return unwrappedEstimatedCellHeight(cellDescription, indexPath)
             }
         }
         
@@ -263,14 +276,14 @@ extension DCTableViewHandling {
     }
     
     func protocolTableView(
-        tableView: UITableView,
-        heightForRowAtIndexPath indexPath: NSIndexPath,
+        _ tableView: UITableView,
+        heightForRowAtIndexPath indexPath: IndexPath,
         currentState: Bool = true,
         cellDescription: CellDescription? = nil) -> CGFloat
     {
         if let cellDescription = cellDescription ?? self.tableView(tableView, descriptionForCellAtIndexPath: indexPath, currentState: true) {
             if let unwrappedCellHeight = cellDescription.estimatedCellHeight {
-                return unwrappedCellHeight(cellDescription: cellDescription, indexPath: indexPath)
+                return unwrappedCellHeight(cellDescription, indexPath)
             }
         }
         
@@ -281,7 +294,7 @@ extension DCTableViewHandling {
     // Header
     
     func protocolTableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         titleForHeaderInSection section: Int,
         currentState: Bool = true, sectionDescription: SectionDescription? = nil) -> String?
     {
@@ -308,11 +321,11 @@ extension DCTableViewHandling {
 //        return UITableViewAutomaticDimension
 //    }
     
-    func protocolTableView(tableView: UITableView, heightForHeaderInSection section: Int, currentState: Bool = true, sectionDescription: SectionDescription? = nil) -> CGFloat
+    func protocolTableView(_ tableView: UITableView, heightForHeaderInSection section: Int, currentState: Bool = true, sectionDescription: SectionDescription? = nil) -> CGFloat
     {
         if let sectionDescription = sectionDescription ?? self.tableView(tableView, descriptionForSection: section, currentState: currentState) {
             if let unwrappedHeaderHeight = sectionDescription.headerHeight {
-                return unwrappedHeaderHeight(sectionDescription: sectionDescription, section: section)
+                return unwrappedHeaderHeight(sectionDescription, section)
             }
         }
         
@@ -324,7 +337,7 @@ extension DCTableViewHandling {
     // Footer
     
     func protocolTableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         titleForFooterInSection section: Int,
         currentState: Bool = true,
         sectionDescription: SectionDescription? = nil) -> String?
@@ -335,14 +348,14 @@ extension DCTableViewHandling {
     
     
     func protocolTableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         heightForFooterInSection section: Int,
         currentState: Bool = true,
         sectionDescription: SectionDescription? = nil) -> CGFloat
     {
         if let sectionDescription = sectionDescription ?? self.tableView(tableView, descriptionForSection: section, currentState: currentState) {
             if let unwrappedFooterHeight = sectionDescription.footerHeight {
-                return unwrappedFooterHeight(sectionDescription: sectionDescription, section: section)
+                return unwrappedFooterHeight(sectionDescription, section)
             }
         }
         
@@ -353,25 +366,25 @@ extension DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Delegate
     
-    func protocolTableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath, cellDescription: CellDescription? = nil)
+    func protocolTableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath, cellDescription: CellDescription? = nil)
     {
         guard let unwrappedCellDescription = cellDescription ?? self.tableView(tableView, descriptionForCellAtIndexPath: indexPath, currentState: true) else { return }
         
         if let didSelectCell = unwrappedCellDescription.didSelectCell {
-            if let unwrappedCell = tableView.cellForRowAtIndexPath(indexPath) {
-                didSelectCell(cell: unwrappedCell, cellDescription: unwrappedCellDescription, indexPath: indexPath)
+            if let unwrappedCell = tableView.cellForRow(at: indexPath) {
+                didSelectCell(unwrappedCell, unwrappedCellDescription, indexPath)
             }
         }
     }
     
     
-    func protocolTableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath, cellDescription: CellDescription? = nil)
+    func protocolTableView(_ tableView: UITableView, didDeselectRowAtIndexPath indexPath: IndexPath, cellDescription: CellDescription? = nil)
     {
         guard let unwrappedCellDescription = cellDescription ?? self.tableView(tableView, descriptionForCellAtIndexPath: indexPath, currentState: true) else { return }
         
         if let didDeselectCell = unwrappedCellDescription.didDeselectCell {
-            if let unwrappedCell = tableView.cellForRowAtIndexPath(indexPath) {
-                didDeselectCell(cell: unwrappedCell, cellDescription: unwrappedCellDescription, indexPath: indexPath)
+            if let unwrappedCell = tableView.cellForRow(at: indexPath) {
+                didDeselectCell(unwrappedCell, unwrappedCellDescription, indexPath)
             }
         }
     }
@@ -382,7 +395,7 @@ extension DCTableViewHandling {
     
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         descriptionForCellWithID cellID: Int,
         inSectionWithID sectionID: Int,
         currentState: Bool = true) -> CellDescription?
@@ -394,7 +407,7 @@ extension DCTableViewHandling {
     }
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         descriptionForSectionWithID sectionID: Int,
         currentState: Bool) -> SectionDescription?
     {
@@ -403,7 +416,7 @@ extension DCTableViewHandling {
     }
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         titleForHeaderInSectionWithID sectionID: Int,
         currentState: Bool = true) -> String?
     {
@@ -414,7 +427,7 @@ extension DCTableViewHandling {
         return nil
     }
     
-    func tableView(tableView: UITableView, sectionIDForSectionIndex section: Int, currentState: Bool = true) -> Int?
+    func tableView(_ tableView: UITableView, sectionIDForSectionIndex section: Int, currentState: Bool = true) -> Int?
     {
         guard let sectionDescription = self.tableView(tableView, descriptionForSection: section, currentState: currentState) else { return nil }
     
@@ -422,7 +435,7 @@ extension DCTableViewHandling {
     }
     
     
-    func tableView(tableView: UITableView, indexOfSectionWithID sectionID: Int, currentState: Bool = true) -> Int?
+    func tableView(_ tableView: UITableView, indexOfSectionWithID sectionID: Int, currentState: Bool = true) -> Int?
     {
         if let structure = structureForTable(tableView) {
             if let sectionIndex = structure.indexOfSectionWithID(sectionID, currentState: currentState) {
@@ -434,13 +447,13 @@ extension DCTableViewHandling {
     }
     
     
-    func tableView(tableView: UITableView, reloadSectionWithID sectionID: Int, rowAnimation: UITableViewRowAnimation = .Automatic)
+    func tableView(_ tableView: UITableView, reloadSectionWithID sectionID: Int, rowAnimation: UITableViewRowAnimation = .automatic)
     {
         if let sectionIndex = self.tableView(tableView, indexOfSectionWithID: sectionID, currentState: true) {
             
             do {
                 try DCExceptionHandler.catchException {
-            tableView.reloadSections(NSIndexSet(index: sectionIndex), withRowAnimation: rowAnimation)
+            tableView.reloadSections(IndexSet(integer: sectionIndex), with: rowAnimation)
         }
     }
             catch let error {
@@ -454,8 +467,8 @@ extension DCTableViewHandling {
     // MARK: - Access using indexPath
     
     func tableView(
-        tableView: UITableView,
-        descriptionForCellAtIndexPath indexPath: NSIndexPath,
+        _ tableView: UITableView,
+        descriptionForCellAtIndexPath indexPath: IndexPath,
         currentState: Bool = true) -> CellDescription?
     {
         let structure = structureForTable(tableView)
@@ -478,7 +491,7 @@ extension DCTableViewHandling {
     }
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         descriptionForSection section: Int,
         currentState: Bool = true) -> SectionDescription?
     {
@@ -506,11 +519,11 @@ extension DCTableViewHandling {
     // MARK: - Animated table changes
     
     func animateTableChanges(
-        tableView: UITableView,
+        _ tableView: UITableView,
         withUpdates: Bool,
         inSections: [Int]? = nil,
-        insertAnimation: UITableViewRowAnimation = .Automatic,
-        deleteAnimation: UITableViewRowAnimation = .Automatic)
+        insertAnimation: UITableViewRowAnimation = .automatic,
+        deleteAnimation: UITableViewRowAnimation = .automatic)
     {
         guard let structure = structureForTable(tableView) else {
             return
@@ -520,14 +533,14 @@ extension DCTableViewHandling {
         
         let visibleCells = tableView.visibleCells
         let visibleCellsIndexPaths = visibleCells.map { cell in
-            tableView.indexPathForCell(cell)!
+            tableView.indexPath(for: cell)!
         }
         
         var sectionsToInsert: [Int] = []
         var sectionsToDelete: [Int] = []
         
-        var rowsToInsert: [NSIndexPath] = []
-        var rowsToDelete: [NSIndexPath] = []
+        var rowsToInsert: [IndexPath] = []
+        var rowsToDelete: [IndexPath] = []
         
         let previousSectionIDs = structure.previousDataSourceSections.map { (section) -> Int in
             section.sectionID
@@ -554,8 +567,8 @@ extension DCTableViewHandling {
             let currentSectionIndex = self.tableView(tableView, indexOfSectionWithID: insetion.value, currentState: true)
             let cellDescriptions = structure.dataSourceCells[currentSectionIndex!]
             
-            for (index, _) in cellDescriptions.enumerate() {
-                rowsToInsert.append(NSIndexPath(forRow: index, inSection: insetion.position))
+            for (index, _) in cellDescriptions.enumerated() {
+                rowsToInsert.append(IndexPath(row: index, section: insetion.position))
             }
         }
         
@@ -602,7 +615,7 @@ extension DCTableViewHandling {
             }
             
             let sectionCellsToDelete = previousSectionCellIDsFiltration.deletion.map({ rowIndex in
-                NSIndexPath(forRow: rowIndex, inSection: previousSectionIndex)
+                IndexPath(row: rowIndex, section: previousSectionIndex)
             })
             
             rowsToDelete += sectionCellsToDelete
@@ -611,20 +624,20 @@ extension DCTableViewHandling {
             if withUpdates {
                 
                 // Find all cells in previous section
-                for (previousIndex, previousCellID) in previousSectionCellIDs.enumerate() {
+                for (previousIndex, previousCellID) in previousSectionCellIDs.enumerated() {
                     // Filter cells for updating
-                    if previousSectionCellIDsFiltration.result.indexOf(previousCellID) != nil {
+                    if previousSectionCellIDsFiltration.result.index(of: previousCellID) != nil {
                         
-                        let previousIndexPath = NSIndexPath(forRow: previousIndex, inSection: previousSectionIndex)
+                        let previousIndexPath = IndexPath(row: previousIndex, section: previousSectionIndex)
                         
                         // Is the cell visible?
-                        if let visibleCellIndex = visibleCellsIndexPaths.indexOf(previousIndexPath) {
+                        if let visibleCellIndex = visibleCellsIndexPaths.index(of: previousIndexPath) {
                             if let cell = visibleCells[visibleCellIndex] as? DCTableViewCellProtocol {
                                 
                                 // Find indexPath of cell in a new data source
-                                for (currentIndex, currentCellID) in currentSectionCellIDs.enumerate() {
+                                for (currentIndex, currentCellID) in currentSectionCellIDs.enumerated() {
                                     if currentCellID == previousCellID {
-                                        let currentIndexPath = NSIndexPath(forRow: currentIndex, inSection: currentSectionIndex)
+                                        let currentIndexPath = IndexPath(row: currentIndex, section: currentSectionIndex)
                                         if let cellDescription = self.tableView(tableView, descriptionForCellAtIndexPath: currentIndexPath) {
                                             //Update visible cell with the new viewModel
                                             if let viewModel = cellDescription.viewModel {
@@ -642,7 +655,7 @@ extension DCTableViewHandling {
             // Row insertions
             // Sequence of insertions that transforms previousArrayFiltration to currentSectionIDs
             let sectionCellsToInsert = DCHelper.insertionsInArray(previousArray: previousSectionCellIDsFiltration.result, currentArray: currentSectionCellIDs).map({ insertion in
-                NSIndexPath(forRow: insertion.position, inSection: currentSectionIndex)
+                IndexPath(row: insertion.position, section: currentSectionIndex)
             })
             if enableDCTableViewControllerLoging {
                 print("        sectionCellsToInsert \(DCHelper.displayIndexPaths(sectionCellsToInsert))")
@@ -666,20 +679,20 @@ extension DCTableViewHandling {
         
         // 1. remove sections
         for sectionIndex in sectionsToDelete {
-            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: deleteAnimation)
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: deleteAnimation)
         }
         
         // 2. remove cells
-        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: deleteAnimation)
+        tableView.deleteRows(at: rowsToDelete, with: deleteAnimation)
         
     
         // 3. insert sections
         for sectionIndex in sectionsToInsert {
-            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: insertAnimation)
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: insertAnimation)
         }
         
         // 4. insert cells
-        tableView.insertRowsAtIndexPaths(rowsToInsert, withRowAnimation: insertAnimation)
+        tableView.insertRows(at: rowsToInsert, with: insertAnimation)
         
         tableView.endUpdates()
         

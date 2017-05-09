@@ -22,13 +22,13 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int
     {
         return protocolNumberOfSectionsInTableView(tableView)
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return protocolTableView(tableView, numberOfRowsInSection: section)
     }
@@ -36,14 +36,14 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Cell
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell
     {
         return self.tableView(tableView, cellForRowAtIndexPath: indexPath, cellDescription: nil)
     }
     
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         willUpdateCell cell: UITableViewCell,
         cellDescription: CellDescription)
     {
@@ -51,7 +51,7 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     }
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         didUpdateCell cell: UITableViewCell,
         cellDescription: CellDescription)
     {
@@ -59,8 +59,8 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     }
     
     func tableView(
-        tableView: UITableView,
-        cellForRowAtIndexPath indexPath: NSIndexPath,
+        _ tableView: UITableView,
+        cellForRowAtIndexPath indexPath: IndexPath,
         cellDescription: CellDescription?) -> UITableViewCell
     {
         var cell: UITableViewCell? = nil
@@ -68,7 +68,7 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
         let cellDescription = cellDescription ?? self.tableView(tableView, descriptionForCellAtIndexPath: indexPath, currentState: true)
         
         if let unwrappedCellDescription = cellDescription {
-            cell = tableView.dequeueReusableCellWithIdentifier(unwrappedCellDescription.cellType.rawValue, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: unwrappedCellDescription.cellType.cellName, for: indexPath)
             
             self.tableView(tableView, willUpdateCell: cell!, cellDescription: unwrappedCellDescription)
             
@@ -85,13 +85,13 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     }
     
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: IndexPath) -> CGFloat
     {
         return protocolTableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
     }
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat
     {
         return protocolTableView(tableView, heightForRowAtIndexPath: indexPath)
     }
@@ -99,7 +99,7 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Header
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         return protocolTableView(tableView, titleForHeaderInSection: section)
     }
@@ -109,7 +109,7 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
 //        return protocolTableView(tableView, estimatedHeightForHeaderInSection: section)
 //    }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
         return protocolTableView(tableView, heightForHeaderInSection: section)
     }
@@ -118,12 +118,12 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Footer
     
-    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String?
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String?
     {
         return protocolTableView(tableView, titleForFooterInSection: section)
     }
     
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
     {
         return protocolTableView(tableView, heightForFooterInSection: section)
     }
@@ -132,13 +132,13 @@ class DCTableSupportedViewController: UIViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Delegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath)
     {
         protocolTableView(tableView, didSelectRowAtIndexPath: indexPath)
     }
     
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, didDeselectRowAtIndexPath indexPath: IndexPath)
     {
         protocolTableView(tableView, didDeselectRowAtIndexPath: indexPath)
     }

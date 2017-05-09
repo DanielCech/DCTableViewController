@@ -13,13 +13,13 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     var tableStructures: [Int: DCTableViewStructure<CellDescription, SectionDescription>] = [:]
     
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return protocolNumberOfSectionsInTableView(tableView)
     }
     
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return protocolTableView(tableView, numberOfRowsInSection: section)
     }
@@ -28,7 +28,7 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     // Custom cell setup steps
 
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         willUpdateCell cell: UITableViewCell,
         cellDescription: CellDescription)
     {
@@ -36,7 +36,7 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     }
     
     func tableView(
-        tableView: UITableView,
+        _ tableView: UITableView,
         didUpdateCell cell: UITableViewCell,
         cellDescription: CellDescription)
     {
@@ -46,14 +46,14 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Cell
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         return self.tableView(tableView, cellForRowAtIndexPath: indexPath, cellDescription: nil)
     }
     
     func tableView(
-        tableView: UITableView,
-        cellForRowAtIndexPath indexPath: NSIndexPath,
+        _ tableView: UITableView,
+        cellForRowAtIndexPath indexPath: IndexPath,
         cellDescription: CellDescription?) -> UITableViewCell
     {
         var cell: UITableViewCell? = nil
@@ -61,7 +61,7 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
         let cellDescription = cellDescription ?? self.tableView(tableView, descriptionForCellAtIndexPath: indexPath, currentState: true)
         
         if let unwrappedCellDescription = cellDescription {
-            cell = tableView.dequeueReusableCellWithIdentifier(unwrappedCellDescription.cellType.rawValue, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: unwrappedCellDescription.cellType.cellName, for: indexPath)
             
             self.tableView(tableView, willUpdateCell: cell!, cellDescription: unwrappedCellDescription)
             
@@ -78,13 +78,13 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     }
     
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return protocolTableView(tableView, estimatedHeightForRowAtIndexPath: indexPath)
     }
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return protocolTableView(tableView, heightForRowAtIndexPath: indexPath)
     }
@@ -92,12 +92,12 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Header
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         return protocolTableView(tableView, titleForHeaderInSection: section)
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
         return protocolTableView(tableView, heightForHeaderInSection: section)
     }
@@ -106,12 +106,12 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Footer
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String?
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String?
     {
         return protocolTableView(tableView, titleForFooterInSection: section)
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
     {
         return protocolTableView(tableView, heightForFooterInSection: section)
     }
@@ -119,13 +119,13 @@ class DCTableViewController: UITableViewController, DCTableViewHandling {
     ////////////////////////////////////////////////////////////////
     // Delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         protocolTableView(tableView, didSelectRowAtIndexPath: indexPath)
     }
     
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath)
     {
         protocolTableView(tableView, didDeselectRowAtIndexPath: indexPath)
     }

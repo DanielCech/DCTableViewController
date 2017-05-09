@@ -12,13 +12,13 @@ import UIKit
 
 protocol DCTableViewCellProtocol {
     
-    func updateCell(viewModel viewModel: Any, delegate: Any?)
+    func updateCell(viewModel: Any, delegate: Any?)
 }
 
 
 extension DCTableViewCellProtocol {
     
-    func updateCell(viewModel viewModel: Any, delegate: Any? = nil)
+    func updateCell(viewModel: Any, delegate: Any? = nil)
     {
         //Implement in derived cells
     }    

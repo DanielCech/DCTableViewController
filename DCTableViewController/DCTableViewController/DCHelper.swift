@@ -11,7 +11,7 @@ import UIKit
 class DCHelper: NSObject {
 
     // Values in arrays are ascending
-    class func deleteUnusedPreviousValues(previousArray previousArray: [Int], currentArray: [Int], updateIndex: Bool = true) -> (result: [Int], deletion: [Int])
+    class func deleteUnusedPreviousValues(previousArray: [Int], currentArray: [Int], updateIndex: Bool = true) -> (result: [Int], deletion: [Int])
     {
         var previousArrayFiltered: [Int] = []
         var deletion: [Int] = []
@@ -60,7 +60,7 @@ class DCHelper: NSObject {
 
     
     
-    class func insertionsInArray(previousArray previousArray: [Int], currentArray: [Int]) -> [(position: Int, value: Int)]
+    class func insertionsInArray(previousArray: [Int], currentArray: [Int]) -> [(position: Int, value: Int)]
     {
         var toInsert: [(position: Int, value: Int)] = []
         
@@ -112,7 +112,7 @@ class DCHelper: NSObject {
     }
     
     
-    class func transformArray(previousArray: [Int], currentArray: [Int]) -> (toDelete: [Int], toInsert: [(position: Int, value: Int)])
+    class func transformArray(_ previousArray: [Int], currentArray: [Int]) -> (toDelete: [Int], toInsert: [(position: Int, value: Int)])
     {
         let filtration = deleteUnusedPreviousValues(previousArray: previousArray, currentArray: currentArray)
         
@@ -122,7 +122,7 @@ class DCHelper: NSObject {
     }
     
     
-    class func testTransform(originalArray: [Int], toDelete: [Int], toInsert: [(position: Int, value: Int)]) -> [Int]
+    class func testTransform(_ originalArray: [Int], toDelete: [Int], toInsert: [(position: Int, value: Int)]) -> [Int]
     {
         var array = originalArray
         
@@ -133,7 +133,7 @@ class DCHelper: NSObject {
                 }
             }
             else {
-                array.removeAtIndex(index)
+                array.remove(at: index)
             }
         }
         
@@ -144,7 +144,7 @@ class DCHelper: NSObject {
                 }
             }
             else {
-                array.insert(insertion.value, atIndex: insertion.position)
+                array.insert(insertion.value, at: insertion.position)
             }
         }
         
@@ -152,11 +152,25 @@ class DCHelper: NSObject {
     }
     
     
-    class func displayIndexPaths(indexPaths: [NSIndexPath]) -> [String]
+    class func displayIndexPaths(_ indexPaths: [IndexPath]) -> [String]
     {
         return indexPaths.map { (indexPath) in
             "<\(indexPath.section), \(indexPath.row)>"
         }
+    }
+    
+}
+
+extension String {
+    
+    func capitalizeFirstLetter() -> String {
+        let first = String(characters.prefix(1)).capitalized
+        let other = String(characters.dropFirst())
+        return first + other
+    }
+    
+    mutating func capitalizedFirstLetter() {
+        self = self.capitalizeFirstLetter()
     }
     
 }

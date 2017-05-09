@@ -24,7 +24,7 @@ class MenuCell: UITableViewCell, DCTableViewCellProtocol, ReusableView {
     }
     
     
-    func updateCell(viewModel viewModel: Any, delegate: Any?) {
+    func updateCell(viewModel: Any, delegate: Any?) {
         guard let unwrappedViewModel = viewModel as? String else { return }
         
         label.text = unwrappedViewModel

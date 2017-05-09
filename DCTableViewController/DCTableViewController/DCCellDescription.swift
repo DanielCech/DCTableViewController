@@ -8,14 +8,30 @@
 
 import UIKit
 
-enum CellType: String {
-    case TestCell
-    case MenuCell
+enum CellType: String, CellTypeDescribing {
+    case testCell
+    case menuCell
 }
 
 
 ////////////////////////////////////////////////////////////////
 // Protocols
+
+protocol CellTypeDescribing: RawRepresentable {
+    var cellName: String { get }
+}
+
+extension CellTypeDescribing {
+    var cellName: String {
+        if let cellName = self.rawValue as? String {
+            return cellName.capitalizeFirstLetter()
+        }
+        else {
+            return ""
+        }
+    }
+}
+
 
 protocol CellDescribing {
     
@@ -23,11 +39,11 @@ protocol CellDescribing {
     var cellType: CellType { get set }
     var viewModel: Any? { get set }
     var delegate: Any? { get set }
-    var cellHeight: ((cellDescription: Self, indexPath: NSIndexPath) -> CGFloat)? { get set }
-    var estimatedCellHeight: ((cellDescription: Self, indexPath: NSIndexPath) -> CGFloat)? { get set }
+    var cellHeight: ((_ cellDescription: Self, _ indexPath: IndexPath) -> CGFloat)? { get set }
+    var estimatedCellHeight: ((_ cellDescription: Self, _ indexPath: IndexPath) -> CGFloat)? { get set }
     
-    var didSelectCell: ((cell: UITableViewCell, cellDescription: Self, indexPath: NSIndexPath) -> ())? { get set }
-    var didDeselectCell: ((cell: UITableViewCell, cellDescription: Self, indexPath: NSIndexPath) -> ())? { get set }
+    var didSelectCell: ((_ cell: UITableViewCell, _ cellDescription: Self, _ indexPath: IndexPath) -> ())? { get set }
+    var didDeselectCell: ((_ cell: UITableViewCell, _ cellDescription: Self, _ indexPath: IndexPath) -> ())? { get set }
 }
 
 ////////////////////////////////////////////////////////////////
@@ -39,21 +55,21 @@ struct CellDescription: CellDescribing {
     var cellType: CellType
     var viewModel: Any?          //viewModel for cell is any associated value with cell, it can be number, string or class/struct
     var delegate: Any?
-    var cellHeight: ((cellDescription: CellDescription, indexPath: NSIndexPath) -> CGFloat)? = nil
-    var estimatedCellHeight: ((cellDescription: CellDescription, indexPath: NSIndexPath) -> CGFloat)? = nil
+    var cellHeight: ((_ cellDescription: CellDescription, _ indexPath: IndexPath) -> CGFloat)? = nil
+    var estimatedCellHeight: ((_ cellDescription: CellDescription, _ indexPath: IndexPath) -> CGFloat)? = nil
     
-    var didSelectCell: ((cell: UITableViewCell, cellDescription: CellDescription, indexPath: NSIndexPath) -> ())? = nil
-    var didDeselectCell: ((cell: UITableViewCell, cellDescription: CellDescription, indexPath: NSIndexPath) -> ())? = nil
+    var didSelectCell: ((_ cell: UITableViewCell, _ cellDescription: CellDescription, _ indexPath: IndexPath) -> ())? = nil
+    var didDeselectCell: ((_ cell: UITableViewCell, _ cellDescription: CellDescription, _ indexPath: IndexPath) -> ())? = nil
     
     init(
         cellID: Int? = nil,
         cellType: CellType,
         viewModel: Any? = nil,
         delegate: Any? = nil,
-        cellHeight: ((cellDescription: CellDescription, indexPath: NSIndexPath) -> CGFloat)? = nil,
-        estimatedCellHeight: ((cellDescription: CellDescription, indexPath: NSIndexPath) -> CGFloat)? = nil,
-        didSelectCell: ((cell: UITableViewCell, cellDescription: CellDescription, indexPath: NSIndexPath) -> ())? = nil,
-        didDeselectCell: ((cell: UITableViewCell, cellDescription: CellDescription, indexPath: NSIndexPath) -> ())? = nil)
+        cellHeight: ((_ cellDescription: CellDescription, _ indexPath: IndexPath) -> CGFloat)? = nil,
+        estimatedCellHeight: ((_ cellDescription: CellDescription, _ indexPath: IndexPath) -> CGFloat)? = nil,
+        didSelectCell: ((_ cell: UITableViewCell, _ cellDescription: CellDescription, _ indexPath: IndexPath) -> ())? = nil,
+        didDeselectCell: ((_ cell: UITableViewCell, _ cellDescription: CellDescription, _ indexPath: IndexPath) -> ())? = nil)
     {
         self.cellID = cellID
         self.cellType = cellType

@@ -17,10 +17,10 @@ protocol SectionDescribing {
     var viewModel: Any? { get set }         //Check whether it is useful?
     
     var headerTitle: String? { get set }
-    var headerHeight: ((sectionDescription: Self, section: Int) -> CGFloat)? { get set }
+    var headerHeight: ((_ sectionDescription: Self, _ section: Int) -> CGFloat)? { get set }
     
     var footerTitle: String? { get set }
-    var footerHeight: ((sectionDescription: Self, section: Int) -> CGFloat)? { get set }
+    var footerHeight: ((_ sectionDescription: Self, _ section: Int) -> CGFloat)? { get set }
 
 }
 
@@ -33,21 +33,21 @@ struct SectionDescription: SectionDescribing {
     var viewModel: Any? = nil
     
     var headerTitle: String? = nil
-    var headerHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
-    var estimatedHeaderHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
+    var headerHeight: ((_ sectionDescription: SectionDescription, _ section: Int) -> CGFloat)? = nil
+    var estimatedHeaderHeight: ((_ sectionDescription: SectionDescription, _ section: Int) -> CGFloat)? = nil
     
     var footerTitle: String? = nil
-    var footerHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
+    var footerHeight: ((_ sectionDescription: SectionDescription, _ section: Int) -> CGFloat)? = nil
     
     init(
         sectionID: Int,
         viewModel: Any? = nil,
         
         headerTitle: String? = nil,
-        headerHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil,
+        headerHeight: ((_ sectionDescription: SectionDescription, _ section: Int) -> CGFloat)? = nil,
         
         footerTitle: String? = nil,
-        footerHeight: ((sectionDescription: SectionDescription, section: Int) -> CGFloat)? = nil
+        footerHeight: ((_ sectionDescription: SectionDescription, _ section: Int) -> CGFloat)? = nil
         )
     {
         self.sectionID = sectionID

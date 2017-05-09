@@ -11,7 +11,7 @@ import UIKit
 class CustomTableUpdatesViewController: DCTableViewController {
     
     var customIteration: Int = 1
-    var updateTimer: NSTimer!
+    var updateTimer: Timer!
     var sectionIndex = 0
     
     var initialState: [(sectionID: Int, sectionCellIDs: [Int])] =
@@ -39,17 +39,17 @@ class CustomTableUpdatesViewController: DCTableViewController {
             print("Registration error")
         }
         
-        tableView.registerCellNib(TestCell)
+        tableView.registerCellNib(TestCell.self)
         
         createDataSourceForTable(tableView)
         tableView.reloadData()
         
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(RandomTableUpdatesViewController.refreshTable), userInfo: nil, repeats: true)
+        updateTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RandomTableUpdatesViewController.refreshTable), userInfo: nil, repeats: true)
     }
 
     // MARK: - Table View
 
-    func createDataSourceForTable(tableView: UITableView) {
+    func createDataSourceForTable(_ tableView: UITableView) {
         
         super.createDataSourceForTable(tableView)
         
@@ -73,7 +73,7 @@ class CustomTableUpdatesViewController: DCTableViewController {
     }
 
     
-    private func _dataSourceFromArray(array: [(sectionID: Int, sectionCellIDs: [Int])])
+    fileprivate func _dataSourceFromArray(_ array: [(sectionID: Int, sectionCellIDs: [Int])])
     {
         for section in array {
             
@@ -87,7 +87,7 @@ class CustomTableUpdatesViewController: DCTableViewController {
             for cellID in section.sectionCellIDs {
                 let cellDescription = CellDescription(
                     cellID: cellID,
-                    cellType: .TestCell,
+                    cellType: .testCell,
                     viewModel: "Cell \(cellID)"
                 )
                 
@@ -108,7 +108,7 @@ class CustomTableUpdatesViewController: DCTableViewController {
         }
         
         createDataSourceForTable(tableView)
-        animateTableChanges(tableView, withUpdates: true, insertAnimation: .Fade, deleteAnimation: .Fade)
+        animateTableChanges(tableView, withUpdates: true, insertAnimation: .fade, deleteAnimation: .fade)
     }
     
 }

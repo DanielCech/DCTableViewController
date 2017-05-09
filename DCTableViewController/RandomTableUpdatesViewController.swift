@@ -10,7 +10,7 @@ import UIKit
 
 class RandomTableUpdatesViewController: DCTableViewController {
     
-    var updateTimer: NSTimer!
+    var updateTimer: Timer!
     var sectionIndex = 0
     var stepNumber = 0
 
@@ -24,17 +24,24 @@ class RandomTableUpdatesViewController: DCTableViewController {
             print("Registration error")
         }
         
-        tableView.registerCellNib(TestCell)
+        tableView.registerCellNib(TestCell.self)
         
         createDataSourceForTable(tableView)
         tableView.reloadData()
         
-        updateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(RandomTableUpdatesViewController.refreshTable), userInfo: nil, repeats: true)
+        updateTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(RandomTableUpdatesViewController.refreshTable), userInfo: nil, repeats: true)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        updateTimer.invalidate()
+        updateTimer = nil
+    }
+    
     // MARK: - Table View
 
-    func createDataSourceForTable(tableView: UITableView) {
+    func createDataSourceForTable(_ tableView: UITableView) {
         super.createDataSourceForTable(tableView)
         
         sectionIndex = 0
@@ -50,7 +57,7 @@ class RandomTableUpdatesViewController: DCTableViewController {
     }
 
     
-    private func _addSection(section: Int)
+    fileprivate func _addSection(_ section: Int)
     {
         if arc4random() % 4 > 2 {
             return
@@ -74,7 +81,7 @@ class RandomTableUpdatesViewController: DCTableViewController {
             
             let cellDescription = CellDescription(
                 cellID: index,
-                cellType: .TestCell,
+                cellType: .testCell,
                 viewModel: "Cell \(index) - Step \(stepNumber)"
             )
             
@@ -93,7 +100,7 @@ class RandomTableUpdatesViewController: DCTableViewController {
     func refreshTable()
     {
         createDataSourceForTable(tableView)
-        animateTableChanges(tableView, withUpdates: true, insertAnimation: .Fade, deleteAnimation: .Fade)
+        animateTableChanges(tableView, withUpdates: true, insertAnimation: .fade, deleteAnimation: .fade)
         stepNumber += 1
     }
     

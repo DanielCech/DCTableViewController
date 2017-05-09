@@ -23,7 +23,7 @@ class MenuViewController: DCTableSupportedViewController {
             print("Registration error")
         }
         
-        tableView.registerCellNib(MenuCell)
+        tableView.registerCellNib(MenuCell.self)
         
         createDataSourceForTable(tableView)
         
@@ -38,7 +38,7 @@ class MenuViewController: DCTableSupportedViewController {
 
     // MARK: - Table View
     
-    func createDataSourceForTable(tableView: UITableView) {
+    func createDataSourceForTable(_ tableView: UITableView) {
         
         super.createDataSourceForTable(tableView)
         
@@ -50,29 +50,29 @@ class MenuViewController: DCTableSupportedViewController {
         let cellDescriptions = [
             CellDescription(
                 cellID: 0,
-                cellType: .MenuCell,
+                cellType: .menuCell,
                 viewModel: "Random Table Updates",
                 didSelectCell: { [weak self] _, _, indexPath in
-                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                    self?.performSegueWithIdentifier("ShowRandomUpdates", sender: self)
+                    self?.tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+                    self?.performSegue(withIdentifier: "ShowRandomUpdates", sender: self)
                 }
             ),
             CellDescription(
                 cellID: 1,
-                cellType: .MenuCell,
+                cellType: .menuCell,
                 viewModel: "Custom Table Updates",
                 didSelectCell: { [weak self] _, _, indexPath in
-                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                    self?.performSegueWithIdentifier("ShowCustomUpdates", sender: self)
+                    self?.tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+                    self?.performSegue(withIdentifier: "ShowCustomUpdates", sender: self)
                 }
             ),
             CellDescription(
                 cellID: 2,
-                cellType: .MenuCell,
+                cellType: .menuCell,
                 viewModel: "Infinite Loading List",
                 didSelectCell: { [weak self] _, _, indexPath in
-                    self?.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                    self?.performSegueWithIdentifier("ShowInfiniteList", sender: self)
+                    self?.tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+                    self?.performSegue(withIdentifier: "ShowInfiniteList", sender: self)
                 }
             )
         ]
