@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum TestCells: String, CellTypeDescribing {
+    case testCell
+}
+
 class CustomTableUpdatesViewController: DCTableViewController {
     
     var customIteration: Int = 1
@@ -87,7 +91,7 @@ class CustomTableUpdatesViewController: DCTableViewController {
             for cellID in section.sectionCellIDs {
                 let cellDescription = CellDescription(
                     cellID: cellID,
-                    cellType: .testCell,
+                    cellType: TestCells.testCell,
                     viewModel: "Cell \(cellID)"
                 )
                 

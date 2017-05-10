@@ -8,20 +8,23 @@
 
 import UIKit
 
-enum CellType: String, CellTypeDescribing {
-    case testCell
-    case menuCell
-}
-
-
 ////////////////////////////////////////////////////////////////
 // Protocols
 
-protocol CellTypeDescribing: RawRepresentable {
+
+protocol CellTypeProtocol {
     var cellName: String { get }
 }
 
-extension CellTypeDescribing {
+protocol CellTypeCreatable: RawRepresentable {
+    var cellName: String { get }
+}
+
+protocol CellTypeDescribing: CellTypeProtocol, CellTypeCreatable {
+    
+}
+
+extension CellTypeCreatable {
     var cellName: String {
         if let cellName = self.rawValue as? String {
             return cellName.capitalizeFirstLetter()
@@ -36,7 +39,7 @@ extension CellTypeDescribing {
 protocol CellDescribing {
     
     var cellID: Int? { get set }
-    var cellType: CellType { get set }
+    var cellType: CellTypeProtocol { get set }
     var viewModel: Any? { get set }
     var delegate: Any? { get set }
     var cellHeight: ((_ cellDescription: Self, _ indexPath: IndexPath) -> CGFloat)? { get set }
@@ -52,7 +55,7 @@ protocol CellDescribing {
 struct CellDescription: CellDescribing {
     
     var cellID: Int? = nil
-    var cellType: CellType
+    var cellType: CellTypeProtocol
     var viewModel: Any?          //viewModel for cell is any associated value with cell, it can be number, string or class/struct
     var delegate: Any?
     var cellHeight: ((_ cellDescription: CellDescription, _ indexPath: IndexPath) -> CGFloat)? = nil
@@ -63,7 +66,7 @@ struct CellDescription: CellDescribing {
     
     init(
         cellID: Int? = nil,
-        cellType: CellType,
+        cellType: CellTypeProtocol,
         viewModel: Any? = nil,
         delegate: Any? = nil,
         cellHeight: ((_ cellDescription: CellDescription, _ indexPath: IndexPath) -> CGFloat)? = nil,

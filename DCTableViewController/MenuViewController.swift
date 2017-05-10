@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum MenuCells: String, CellTypeDescribing {
+    case menuCell
+}
+
+
 class MenuViewController: DCTableSupportedViewController {
 
     @IBOutlet var tableView: UITableView!
@@ -50,7 +55,7 @@ class MenuViewController: DCTableSupportedViewController {
         let cellDescriptions = [
             CellDescription(
                 cellID: 0,
-                cellType: .menuCell,
+                cellType: MenuCells.menuCell,
                 viewModel: "Random Table Updates",
                 didSelectCell: { [weak self] _, _, indexPath in
                     self?.tableView.deselectRow(at: indexPath as IndexPath, animated: true)
@@ -59,7 +64,7 @@ class MenuViewController: DCTableSupportedViewController {
             ),
             CellDescription(
                 cellID: 1,
-                cellType: .menuCell,
+                cellType: MenuCells.menuCell,
                 viewModel: "Custom Table Updates",
                 didSelectCell: { [weak self] _, _, indexPath in
                     self?.tableView.deselectRow(at: indexPath as IndexPath, animated: true)
@@ -68,7 +73,7 @@ class MenuViewController: DCTableSupportedViewController {
             ),
             CellDescription(
                 cellID: 2,
-                cellType: .menuCell,
+                cellType: MenuCells.menuCell,
                 viewModel: "Infinite Loading List",
                 didSelectCell: { [weak self] _, _, indexPath in
                     self?.tableView.deselectRow(at: indexPath as IndexPath, animated: true)

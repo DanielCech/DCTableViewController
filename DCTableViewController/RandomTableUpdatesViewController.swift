@@ -81,7 +81,7 @@ class RandomTableUpdatesViewController: DCTableViewController {
             
             let cellDescription = CellDescription(
                 cellID: index,
-                cellType: .testCell,
+                cellType: TestCells.testCell,
                 viewModel: "Cell \(index) - Step \(stepNumber)"
             )
             
